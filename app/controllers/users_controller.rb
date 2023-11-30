@@ -8,6 +8,7 @@ class UsersController < Clearance::UsersController
       redirect_to root_path, notice: '¡Successfully registrated!'
     else
       flash[:alert] = 'Error registrating user.'
+      p @user.errors.full_messages
       render :new
     end
   end
