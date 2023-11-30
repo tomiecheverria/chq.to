@@ -7,8 +7,8 @@ class UsersController < Clearance::UsersController
       sign_in @user
       redirect_to root_path, notice: '¡Successfully registrated!'
     else
-      flash.now[:alert] = 'Error al registrar el usuario. Por favor, corrige los errores.'
-      render template: 'users/new'
+      flash[:alert] = 'Error registrating user.'
+      render :new
     end
   end
 
