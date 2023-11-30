@@ -1,13 +1,14 @@
 # app/controllers/users_controller.rb
-class UsersController < ApplicationController
+class UsersController < Clearance::UsersController
   def create
-    @user = User.create_with_params(user_params)
+    @user = user_from_params
 
-    if @user.errors.empty?
+    if @user.save
       sign_in @user
-      redirect_to root_path, notice: '¡Registro exitoso!'
+      redirect_to root_path, notice: '¡Successfully registrated!'
     else
-      render :new
+      flash.now[:alert] = 'Error al registrar el usuario. Por favor, corrige los errores.'
+      render template: 'users/new'
     end
   end
 

@@ -17,6 +17,9 @@
     <% else %>
       <%= link_to 'Sign in', sign_in_path %>
     <% end %>
+    <% if flash[:notice] %>
+    <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
   </header>
   <body>
     <%= yield %>
