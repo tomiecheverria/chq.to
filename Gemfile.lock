@@ -110,6 +110,8 @@ GEM
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -130,8 +132,6 @@ GEM
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
-    macaddr (1.7.2)
-      systemu (~> 2.6.5)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -239,10 +239,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    slugged (2.0.0)
-      activerecord (>= 3.0)
-      activesupport (>= 3.0)
-      uuid
     sorbet-runtime (0.5.11144)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -255,7 +251,6 @@ GEM
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
     stringio (3.1.0)
-    systemu (2.6.5)
     thor (1.3.0)
     timeout (0.4.1)
     turbo-rails (1.5.0)
@@ -265,8 +260,6 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
-    uuid (2.3.9)
-      macaddr (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -291,6 +284,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  friendly_id
   importmap-rails
   jbuilder
   puma (>= 5.0)
@@ -298,7 +292,6 @@ DEPENDENCIES
   rubocop
   ruby-lsp
   selenium-webdriver
-  slugged
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails

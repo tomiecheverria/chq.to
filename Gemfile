@@ -44,7 +44,8 @@ gem "bootsnap", require: false
 gem 'devise'
 gem "ruby-lsp"
 gem "rubocop"
-gem 'slugged'
+gem 'friendly_id'
+
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
