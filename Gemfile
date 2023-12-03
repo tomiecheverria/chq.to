@@ -42,6 +42,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 gem 'devise'
+gem "ruby-lsp"
+gem "rubocop"
 
 
 
