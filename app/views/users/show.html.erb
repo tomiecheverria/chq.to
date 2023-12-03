@@ -1,0 +1,13 @@
+<!-- app/views/users/show.html.erb -->
+<div class="container mt-4">
+  <h1 class="mb-4">Perfil de Usuario</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text">Email: <%= @user.email %></p>
+      <!-- Otros detalles del usuario que quieras mostrar -->
+    </div>
+  </div>
+
+  <%= link_to 'Editar perfil', edit_user_registration_path, class: 'btn btn-primary mt-3' %>
+</div>
