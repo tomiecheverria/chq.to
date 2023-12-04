@@ -1,20 +1,25 @@
 class LinksController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @links = current_user.links
   end
 
   def new
-    @link = current_user.links.build
+    @link ||= current_user.links.build
+  end
+
+  def show
+    @link = current_user.links.find(params[:id])
   end
 
   def create
     @link = current_user.links.build(link_params)
     if @link.save
-      redirect_to links_path, notice: 'Link succesfully created.'
+      redirect_to user_path(current_user), notice: 'Link succesfully created.'
     else
-      render :new
+      flash[:errors] = @link.errors.full_messages
+      redirect_to new_link_path
     end
   end
 
@@ -40,6 +45,6 @@ class LinksController < ApplicationController
   private
 
   def link_params
-    params.require(:link).permit(:name, :url, :slug)
+    params.require(:link).permit(:url)
   end
 end
