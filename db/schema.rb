@@ -11,17 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2023_12_03_182647) do
-  create_table "friendly_id_slugs", force: :cascade do |t|
-    t.string "slug", null: false
-    t.integer "sluggable_id", null: false
-    t.string "sluggable_type", limit: 50
-    t.string "scope"
-    t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
-  end
-
   create_table "links", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "slug"
