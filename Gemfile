@@ -44,7 +44,7 @@ gem "bootsnap", require: false
 gem 'devise'
 gem "ruby-lsp"
 gem "rubocop"
-gem 'friendly_id'
+
 
 
 
@@ -72,3 +72,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+

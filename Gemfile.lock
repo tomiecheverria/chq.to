@@ -110,8 +110,6 @@ GEM
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
-    friendly_id (5.5.1)
-      activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -167,14 +165,14 @@ GEM
     puma (6.4.0)
       nio4r (~> 2.0)
     racc (1.7.3)
-    rack (2.2.8)
-    rack-session (1.0.2)
-      rack (< 3)
+    rack (3.0.8)
+    rack-session (2.0.0)
+      rack (>= 3.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
-    rackup (1.0.0)
-      rack (< 3)
-      webrick
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
     rails (7.1.2)
       actioncable (= 7.1.2)
       actionmailbox (= 7.1.2)
@@ -284,7 +282,6 @@ DEPENDENCIES
   capybara
   debug
   devise
-  friendly_id
   importmap-rails
   jbuilder
   puma (>= 5.0)
