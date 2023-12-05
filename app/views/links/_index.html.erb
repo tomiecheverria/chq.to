@@ -1,0 +1,11 @@
+<h1>All Links</h1>
+
+<% @links.each do |link| %>
+  <p>
+    <%= link_to build_link_url(link.slug), link.url %>
+    <%= link_to 'Edit', edit_link_path(link), class: 'btn btn-secondary' %>
+    <%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', remote: true %>
+  </p>
+<% end %>
+
+<%= link_to 'New Link', new_link_path, class: 'btn btn-primary' %>

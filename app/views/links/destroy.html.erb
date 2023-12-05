@@ -1,0 +1,7 @@
+<!-- app/views/links/destroy.html.erb -->
+
+<h1>Confirmar eliminación</h1>
+<p>¿Estás seguro de que deseas eliminar este enlace?</p>
+
+<%= link_to 'Eliminar', @link, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger' %>
+<%= link_to 'Cancelar', links_path, class: 'btn btn-secondary' %>

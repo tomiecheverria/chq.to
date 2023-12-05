@@ -10,12 +10,13 @@ class LinksController < ApplicationController
   end
 
   def show
-    @link = Link.find_by(slug: params[:slug])
-    if @link
-      redirect_to @link.url
-    else
-      redirect_to '/404'
-    end
+    # @link = Link.find_by(params[:id])
+    # if @link
+    #   p "success"
+    # else
+    #   redirect_to '/404'
+    # end
+    @link = Link.find_by(params[:id])
   end
 
   def create
@@ -47,7 +48,8 @@ class LinksController < ApplicationController
   def destroy
     @link = current_user.links.find(params[:id])
     @link.destroy
-    redirect_to links_path, notice: 'Link successfuly deleted.'
+    puts "llego aca"
+    redirect_to links_path, notice: 'Link successfully deleted.'
   end
 
   private
