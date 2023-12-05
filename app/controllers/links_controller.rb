@@ -14,7 +14,7 @@ class LinksController < ApplicationController
     if @link
       redirect_to @link.url
     else
-      render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+      redirect_to '/404'
     end
   end
 
@@ -35,7 +35,7 @@ class LinksController < ApplicationController
   def update
     @link = current_user.links.find(params[:id])
     if @link.update(link_params)
-      redirect_to links_path, notice: 'Link successfuly updated.'
+      redirect_to user_path(current_user), notice: 'Link successfuly updated.'
     else
       render :edit
     end
@@ -53,11 +53,4 @@ class LinksController < ApplicationController
     params.require(:link).permit(:url)
   end
 
-  def build_link_url(slug)
-    if Rails.env.development?
-      "http://127.0.0.1:3000/l/#{slug}"
-    else
-      "https://chq.to/l/#{slug}"
-    end
-  end
 end

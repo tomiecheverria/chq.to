@@ -18,6 +18,8 @@
 </div>
 
 <div class="actions">
-  <%= f.submit "Crear Link" %>
+  <%= f.submit @link.new_record? ? "Crear Link" : "Editar Link" %>
+</div>
 </div>
 <% end %>
+<%= link_to 'Back',   user_path(current_user)%>

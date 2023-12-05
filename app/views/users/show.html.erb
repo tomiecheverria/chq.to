@@ -19,6 +19,12 @@
   <p>
     <%= link_to build_link_url(link.slug), link.url %>
     <%= link_to 'Edit', edit_link_path(link), class: 'btn btn-secondary' %>
+    <%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   </p>
   <% end %>
+
+
+<% if flash[:notice] %>
+  <p id="notice"><%= flash[:notice] %></p>
+<% end %>
 </div>
