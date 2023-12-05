@@ -10,7 +10,12 @@ class LinksController < ApplicationController
   end
 
   def show
-    @link = current_user.links.find(params[:id])
+    @link = Link.find_by(slug: params[:slug])
+    if @link
+      redirect_to @link.url
+    else
+      render file: "#{Rails.root}/public/404", layout: false, status: :not_found
+    end
   end
 
   def create
@@ -46,5 +51,13 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:url)
+  end
+
+  def build_link_url(slug)
+    if Rails.env.development?
+      "http://127.0.0.1:3000/l/#{slug}"
+    else
+      "https://chq.to/l/#{slug}"
+    end
   end
 end
