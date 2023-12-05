@@ -1,26 +1,6 @@
 <h1>Create new link</h1>
 
 
-<%= form_for @link do |f| %>
+<%= render 'form' %>
 
-<% if flash[:errors] %>
-<div id="error_explanation">
-  <h2><%= pluralize(flash[:errors].count, "error") %> prohibited this link from being saved:</h2>
-
-  <ul>
-    <% flash[:errors].each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-
-<div class="field">
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-</div>
-
-<div class="actions">
-  <%= f.submit "Crear Link" %>
-</div>
-<% end %>
+<%= link_to 'Back', links_path %>
