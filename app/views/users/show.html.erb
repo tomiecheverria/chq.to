@@ -17,7 +17,7 @@
   <h2> List of my links</h2>
   <% @links.each do |link| %>
   <p>
-    <%= link_to link.slug, link.url %>
+    <%= link_to build_link_url(link.slug), link.url %>
   </p>
   <% end %>
 </div>
