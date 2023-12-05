@@ -1,5 +1,5 @@
 class LinksController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
     @links = current_user.links
@@ -24,7 +24,7 @@ class LinksController < ApplicationController
       redirect_to user_path(current_user), notice: 'Link succesfully created.'
     else
       flash[:errors] = @link.errors.full_messages
-      redirect_to new_link_path
+      render :new
     end
   end
 
@@ -34,11 +34,14 @@ class LinksController < ApplicationController
 
   def update
     @link = current_user.links.find(params[:id])
+
     if @link.update(link_params)
-      redirect_to user_path(current_user), notice: 'Link successfuly updated.'
+      flash[:notice] = 'Link successfully updated.'
     else
-      render :edit
+      flash[:errors] = @link.errors.full_messages
+      # render :edit
     end
+    redirect_to edit_link_path(@link)
   end
 
   def destroy
@@ -52,5 +55,4 @@ class LinksController < ApplicationController
   def link_params
     params.require(:link).permit(:url)
   end
-
 end

@@ -1,4 +1,9 @@
 <h1>Edit Link</h1>
+<% if @success_message %>
+  <div class="alert alert-success">
+    <%= @success_message %>
+  </div>
+<% end %>
 
 
 <%= render 'form' %>
