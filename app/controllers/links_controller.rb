@@ -42,11 +42,7 @@ class LinksController < ApplicationController
   def destroy
     @link = current_user.links.find(params[:id])
     @link.destroy
-  
-    respond_to do |format|
-      format.html { redirect_to user_path(current_user), notice: 'Link successfully deleted.' }
-      format.js
-    end
+    redirect_to user_path(current_user), notice: 'Link successfully deleted.'
   end
 
   private
