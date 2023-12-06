@@ -21,7 +21,12 @@
     <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, Link.link_types[type]] },{}, id: 'link_type_select' %>
   </div>
 
-  <div class="field" id="expiration-date-field" style="<%= 'display: none;' unless @link.link_type == 'temporary' %>">
+  <div class="field" id="expiration-date-field" style="<%= 'display: none;' unless @link.link_type == '1' %>">
+    <%= f.label :expiration_date %>
+    <%= f.date_field :expiration_date %>
+  </div>
+
+  <div class="field" id="password" style="<%= 'display: none;' unless @link.link_type == '2' %>">
     <%= f.label :expiration_date %>
     <%= f.date_field :expiration_date %>
   </div>
@@ -40,10 +45,16 @@
 document.addEventListener('turbo:load', function () {
   const linkTypeSelect = document.getElementById('link_type_select');
   const expirationDateField = document.getElementById('expiration-date-field');
+  const passwordField = document.getElementById('password');
 
   function toggleExpirationDateField() {
     console.log(linkTypeSelect.value)
     expirationDateField.style.display = linkTypeSelect.value === '1' ? 'block' : 'none';
+  }
+
+  function togglePasswordFiled() {
+    console.log(linkTypeSelect.value)
+    expirationDateField.style.display = linkTypeSelect.value === '2' ? 'block' : 'none';
   }
 
   linkTypeSelect.addEventListener('change', toggleExpirationDateField);
