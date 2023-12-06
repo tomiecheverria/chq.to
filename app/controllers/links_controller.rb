@@ -14,12 +14,12 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = current_user.links.build(link_params)
+    @link = build_link_with_type(link_params)
     if @link.save
-      redirect_to user_path(current_user), notice: 'Link succesfully created.'
+      redirect_to user_path(current_user), notice: 'Link successfully created.'
     else
       flash[:errors] = @link.errors.full_messages
-      render :new
+      redirect_to new_link_path(@link)
     end
   end
 
@@ -47,7 +47,27 @@ class LinksController < ApplicationController
 
   private
 
+  def build_link_with_type(params)
+    puts params.inspect
+    link = current_user.links.build(params)
+    link.link_type = link_type_from_params(params[:link_type])
+    p "link #{link.link_type}"
+    link
+  end
+
+  def link_type_from_params(type_param)
+    puts "type_param #{type_param}"
+    case type_param
+    when 'temporary'
+      :temporary
+    when 'regular'
+      :regular
+    else
+      :regular
+    end
+  end
+
   def link_params
-    params.require(:link).permit(:url)
+    params.require(:link).permit(:url, :expiration_date, :link_type)
   end
 end

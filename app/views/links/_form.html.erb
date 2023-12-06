@@ -1,5 +1,5 @@
-<%= turbo_frame_tag 'link_form' do %>
-<%= form_for @link do |f| %>
+
+<%= form_for @link, data: { turbo: false } do |f| %>
   <% if flash[:errors] %>
     <div id="error_explanation">
       <h2><%= pluralize(flash[:errors].count, "error") %> prohibited this link from being saved:</h2>
@@ -18,48 +18,50 @@
 
   <div class="field" >
     <%= f.label :link_type %>
-    <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, Link.link_types[type]] },{}, id: 'link_type_select' %>
+    <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, type] }, {}, id: 'link_type_select' %>
   </div>
 
-  <div class="field" id="expiration-date-field" style="<%= 'display: none;' unless @link.link_type == '1' %>">
+  <div class="field" id="expiration-date-field" style="<%= 'display: none;' unless @link.link_type == 'temporary' %>">
     <%= f.label :expiration_date %>
     <%= f.date_field :expiration_date %>
   </div>
 
-  <div class="field" id="password" style="<%= 'display: none;' unless @link.link_type == '2' %>">
-    <%= f.label :expiration_date %>
-    <%= f.date_field :expiration_date %>
-  </div>
+  <div class="field" id="password-field" style="<%= 'display: none;' unless @link.link_type == 'private_link' %>">
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+</div>
 
   <div class="actions">
-    <%= f.submit @link.new_record? ? "Crear Link" : "Editar Link" %>
+    <%= f.submit @link.new_record? ? "Create Link" : "Editar Link" %>
   </div>
 
 <% end %>
-<% end %>
+
 
 <%= link_to 'Back', user_path(current_user) %>
 
   <script>
  
-document.addEventListener('turbo:load', function () {
+  document.addEventListener('turbo:load', function () {
   const linkTypeSelect = document.getElementById('link_type_select');
   const expirationDateField = document.getElementById('expiration-date-field');
-  const passwordField = document.getElementById('password');
+  const passwordField = document.getElementById('password-field'); // Cambiado a 'password-field'
 
   function toggleExpirationDateField() {
-    console.log(linkTypeSelect.value)
-    expirationDateField.style.display = linkTypeSelect.value === '1' ? 'block' : 'none';
+    expirationDateField.style.display = linkTypeSelect.value === 'temporary' ? 'block' : 'none';
+    console.log(linkTypeSelect.value);
   }
 
-  function togglePasswordFiled() {
-    console.log(linkTypeSelect.value)
-    expirationDateField.style.display = linkTypeSelect.value === '2' ? 'block' : 'none';
+  function togglePasswordField() {
+    passwordField.style.display = linkTypeSelect.value === 'private_link' ? 'block' : 'none';
   }
 
   linkTypeSelect.addEventListener('change', toggleExpirationDateField);
+  linkTypeSelect.addEventListener('change', togglePasswordField);
 
-  // Llama a la función una vez al cargar la página para establecer el estado inicial
+  // Llama a las funciones una vez al cargar la página para establecer el estado inicial
   toggleExpirationDateField();
+  togglePasswordField();
 });
+
   </script>
