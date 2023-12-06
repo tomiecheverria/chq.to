@@ -17,6 +17,11 @@
   <%= f.text_field :url %>
 </div>
 
+ <div class="field">
+    <%= f.label :link_type %>
+    <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, Link.link_types[type]] } %>
+  </div>
+
 <div class="actions">
   <%= f.submit @link.new_record? ? "Crear Link" : "Editar Link" %>
 </div>
