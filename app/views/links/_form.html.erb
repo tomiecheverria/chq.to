@@ -22,6 +22,10 @@
     <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, Link.link_types[type]] } %>
   </div>
 
+  <% if f.object.link_type == 'Temporary' %>
+    <%= render partial: 'expiration_date_field', locals: { f: f } %>
+  <% end %>
+
 <div class="actions">
   <%= f.submit @link.new_record? ? "Crear Link" : "Editar Link" %>
 </div>
