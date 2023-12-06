@@ -1,54 +1,54 @@
+<%= turbo_frame_tag 'link_form' do %>
 <%= form_for @link do |f| %>
+  <% if flash[:errors] %>
+    <div id="error_explanation">
+      <h2><%= pluralize(flash[:errors].count, "error") %> prohibited this link from being saved:</h2>
+      <ul>
+        <% flash[:errors].each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<% if flash[:errors] %>
-<div id="error_explanation">
-  <h2><%= pluralize(flash[:errors].count, "error") %> prohibited this link from being saved:</h2>
+  <div class="field">
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  </div>
 
-  <ul>
-    <% flash[:errors].each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-
-<div class="field">
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-</div>
-
- <div class="field">
+  <div class="field" >
     <%= f.label :link_type %>
-    <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, Link.link_types[type]] } %>
+    <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, Link.link_types[type]] },{}, id: 'link_type_select' %>
   </div>
 
- <div class="field" id="expiration-date-field" style="<%= 'display: none;' unless @link.link_type == 'temporary' %>">
+  <div class="field" id="expiration-date-field" style="<%= 'display: none;' unless @link.link_type == 'temporary' %>">
     <%= f.label :expiration_date %>
-    <%= f.datetime_field :expiration_date %>
+    <%= f.date_field :expiration_date %>
   </div>
 
-<div class="actions">
-  <%= f.submit @link.new_record? ? "Crear Link" : "Editar Link" %>
-</div>
-</div>
+  <div class="actions">
+    <%= f.submit @link.new_record? ? "Crear Link" : "Editar Link" %>
+  </div>
+
+<% end %>
 <% end %>
 
+<%= link_to 'Back', user_path(current_user) %>
 
-<script>
-  console.log("El archivo link_form.js se está ejecutando correctamente.");
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log("El archivo link_form.js se está ejecutando correctamente.");
-      const linkTypeSelect = document.getElementById('link_type_select');
-      const expirationDateField = document.getElementById('expiration_date_field');
+  <script>
+ 
+document.addEventListener('turbo:load', function () {
+  const linkTypeSelect = document.getElementById('link_type_select');
+  const expirationDateField = document.getElementById('expiration-date-field');
 
-      linkTypeSelect.addEventListener('change', function() {
-        if (linkTypeSelect.value === '1') {
-          expirationDateField.style.display = 'block';
-        } else {
-          expirationDateField.style.display = 'none';
-        }
-      });
-    });
-</script>
+  function toggleExpirationDateField() {
+    console.log(linkTypeSelect.value)
+    expirationDateField.style.display = linkTypeSelect.value === '1' ? 'block' : 'none';
+  }
 
-<%= link_to 'Back',   user_path(current_user)%>
+  linkTypeSelect.addEventListener('change', toggleExpirationDateField);
+
+  // Llama a la función una vez al cargar la página para establecer el estado inicial
+  toggleExpirationDateField();
+});
+  </script>
