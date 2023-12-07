@@ -1,6 +1,5 @@
 class LinksController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
-
+  before_action :authenticate_user!
   def index
     @links = current_user.links
   end
@@ -12,7 +11,7 @@ class LinksController < ApplicationController
   def show
     @link = Link.find(params[:id])
     if @link.link_type.to_sym == :temporary && link_expired?(@link)
-      render status: :not_found, html: '', layout: 'application'
+      redirect_to '/404'
     elsif @link.link_type.to_sym == :private_link
       render '_show_private_link'
     end
@@ -47,7 +46,8 @@ class LinksController < ApplicationController
   def destroy
     @link = current_user.links.find(params[:id])
     @link.destroy
-    redirect_to user_path(current_user), notice: 'Link successfully deleted.'
+    flash[:notice] = 'Link successfully deleted.'
+    redirect_to user_path(current_user), notice: "Link successfully deleted."
   end
 
   def update_password
