@@ -64,12 +64,14 @@ class LinksController < ApplicationController
       :regular
     when 'private_link'
       :private_link
+    when 'ephemeral'
+      :ephemeral
     else
       :regular
     end
   end
 
   def link_params
-    params.require(:link).permit(:url, :expiration_date, :link_type, :password, :password_confirmation)
+    params.require(:link).permit(:url, :expiration_date, :link_type, :password, :password_confirmation, :accessed)
   end
 end

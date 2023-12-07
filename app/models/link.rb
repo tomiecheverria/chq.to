@@ -10,6 +10,7 @@ class Link < ApplicationRecord
   validates :password, length: { in: 3..20 }, if: -> { custom_private_link? }
   validates :password_confirmation, presence: true, if: -> { custom_private_link? }
   validate :password_match?, if: -> { custom_private_link? }
+  validates :accessed, inclusion: { in: [true, false] }, if: -> { custom_ehemeral? }
 
 
   before_validation :generate_unique_slug
@@ -45,6 +46,10 @@ class Link < ApplicationRecord
 
   def custom_private_link?
     link_type == 'private_link'
+  end
+
+  def custom_ehemeral?
+    link_type == 'ephemeral'
   end
 
   def password_match?
