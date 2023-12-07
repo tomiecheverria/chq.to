@@ -11,8 +11,11 @@ class LinksController < ApplicationController
   def show
     @link = Link.find(params[:id])
     if @link.link_type.to_sym == :temporary && link_expired?(@link)
-      redirect_to '/404'
-    elsif @link.link_type.to_sym == :private_link
+
+
+
+
+link_type.to_sym == :private_link
       render '_show_private_link'
     end
   end
