@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Private Link Details</h1>
+
+    <%= form_for @link, url: { action: :update_password }, method: :patch do |f| %>
+    <% if flash[:errors] %>
+      <div id="error_explanation">
+        <h2><%= pluralize(flash[:errors].count, "error") %> prohibited this link from being saved:</h2>
+        <ul>
+          <% flash[:errors].each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit Password", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Back to Links', user_path(current_user), class: 'btn btn-secondary' %>
+</div>

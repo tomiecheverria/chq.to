@@ -10,11 +10,11 @@ class LinksController < ApplicationController
   end
 
   def show
-    p params
     @link = Link.find(params[:id])
-    puts @link.id
     if @link.link_type.to_sym == :temporary && link_expired?(@link)
       render status: :not_found, html: '', layout: 'application'
+    elsif @link.link_type.to_sym == :private_link
+      render '_show_private_link'
     end
   end
 
@@ -48,6 +48,19 @@ class LinksController < ApplicationController
     @link = current_user.links.find(params[:id])
     @link.destroy
     redirect_to user_path(current_user), notice: 'Link successfully deleted.'
+  end
+
+  def update_password
+    @link = Link.find(params[:id])
+    password = params[:link][:password]
+
+    if @link.password == password
+      flash[:notice] = 'Password updated successfully.'
+    else
+      flash[:errors] = ['Invalid password.']
+    end
+
+    redirect_to link_path(@link)
   end
 
   private
