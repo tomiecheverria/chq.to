@@ -2,8 +2,9 @@
 
 <% @links.each do |link| %>
   <p>
-    <%= link_to build_link_url(link.slug), link.url %>
+    <%= link_to build_link_url(link.slug), link_path(link) %>
     <%= link.link_type.capitalize %>
+     <%= link_to 'Show', link_path(link), class: 'btn btn-primary' %>
     <%= link_to 'Edit', edit_link_path(link), class: 'btn btn-secondary' %>
     <%= link_to 'Delete', link, method: :delete, data: { turbo_method: :delete,confirm:'Are you sure' }, class: 'btn btn-danger'%>
 

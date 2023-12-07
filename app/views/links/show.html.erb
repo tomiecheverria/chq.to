@@ -1,5 +1,41 @@
-<h1>Link Details</h1>
+<!-- app/views/links/show.html.erb -->
 
-<p><strong>URL:</strong> <%= @link.url %></p>
+<div class="container mt-5">
+  <h1 class="mb-4 text-primary">Link Details</h1>
 
-<%= link_to 'Back to Index', links_path %>
+  <dl class="row bg-light">
+    <dt class="col-sm-3 text-secondary">ID:</dt>
+    <dd class="col-sm-9"><%= @link.id %></dd>
+
+    <dt class="col-sm-3 text-secondary">User ID:</dt>
+    <dd class="col-sm-9"><%= @link.user_id %></dd>
+
+    <dt class="col-sm-3 text-secondary">Slug:</dt>
+    <dd class="col-sm-9"><%= @link.slug %></dd>
+
+    <dt class="col-sm-3 text-secondary">URL:</dt>
+    <dd class="col-sm-9"><%= link_to @link.url, @link.url, target: "_blank" %></dd>
+
+    <dt class="col-sm-3 text-secondary">Created At:</dt>
+    <dd class="col-sm-9"><%= @link.created_at %></dd>
+
+    <dt class="col-sm-3 text-secondary">Updated At:</dt>
+    <dd class="col-sm-9"><%= @link.updated_at %></dd>
+
+    <% case @link.link_type.to_sym %>
+    <% when :temporary %>
+    <dt class="col-sm-3 text-secondary">Expiration Date:</dt>
+    <dd class="col-sm-9"><%= @link.expiration_date %></dd>
+
+    <% when :private_link %>
+    <dt class="col-sm-3 text-secondary">Password:</dt>
+    <dd class="col-sm-9"><%= @link.password %></dd>
+
+    <% when :ephemeral %>
+    <dt class="col-sm-3 text-secondary">Accessed:</dt>
+    <dd class="col-sm-9"><%= @link.accessed ? 'Yes' : 'No' %></dd>
+    <% end %>
+  </dl>
+
+  <%= link_to 'Back to Links', user_path(current_user), class: 'btn btn-primary' %>
+</div>
