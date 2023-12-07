@@ -57,18 +57,13 @@ class LinksController < ApplicationController
   end
 
   def link_type_from_params(type_param)
-    case type_param
-    when 'temporary'
-      :temporary
-    when 'regular'
-      :regular
-    when 'private_link'
-      :private_link
-    when 'ephemeral'
-      :ephemeral
-    else
-      :regular
-    end
+    type_mapping = {
+      'temporary' => :temporary,
+      'regular' => :regular,
+      'private_link' => :private_link,
+      'ephemeral' => :ephemeral
+    }
+    type_mapping[type_param]
   end
 
   def link_params
