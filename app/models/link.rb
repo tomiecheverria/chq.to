@@ -7,9 +7,9 @@ class Link < ApplicationRecord
   validates :expiration_date, presence: true, if: -> { temporary? }
   validate :expiration_date_cannot_be_in_the_past, if: -> { temporary? }
   validate :expiration_date_cannot_be_too_far_in_the_future, if: -> { temporary? }
-  validates :password, length: { in: 3..20 }, if: -> { private_link? }
-  validates :password_confirmation, presence: true, if: -> { private_link? }
-  validate :password_match?, if: -> { private_link? }
+  validates :password, length: { in: 3..20 }, if: -> { custom_private_link? }
+  validates :password_confirmation, presence: true, if: -> { custom_private_link? }
+  validate :password_match?, if: -> { custom_private_link? }
 
 
   before_validation :generate_unique_slug
@@ -43,7 +43,7 @@ class Link < ApplicationRecord
     link_type == 'temporary'
   end
 
-  def private_link?
+  def custom_private_link?
     link_type == 'private_link'
   end
 
