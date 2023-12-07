@@ -7,6 +7,9 @@ class Link < ApplicationRecord
   validates :expiration_date, presence: true, if: -> { temporary? }
   validate :expiration_date_cannot_be_in_the_past, if: -> { temporary? }
   validate :expiration_date_cannot_be_too_far_in_the_future, if: -> { temporary? }
+  validates :password, length: { in: 3..20 }, if: -> { private_link? }
+  validates :password_confirmation, presence: true, if: -> { private_link? }
+  validate :password_match?, if: -> { private_link? }
 
 
   before_validation :generate_unique_slug
@@ -39,4 +42,13 @@ class Link < ApplicationRecord
   def temporary?
     link_type == 'temporary'
   end
+
+  def private_link?
+    link_type == 'private_link'
+  end
+
+  def password_match?
+    errors.add(:password_confirmation, "doesn't match password") if password != password_confirmation
+  end
+
 end

@@ -51,23 +51,25 @@ class LinksController < ApplicationController
     puts params.inspect
     link = current_user.links.build(params)
     link.link_type = link_type_from_params(params[:link_type])
+    link.password_confirmation = params[:password_confirmation] if link.private_link?
     p "link #{link.link_type}"
     link
   end
 
   def link_type_from_params(type_param)
-    puts "type_param #{type_param}"
     case type_param
     when 'temporary'
       :temporary
     when 'regular'
       :regular
+    when 'private_link'
+      :private_link
     else
       :regular
     end
   end
 
   def link_params
-    params.require(:link).permit(:url, :expiration_date, :link_type)
+    params.require(:link).permit(:url, :expiration_date, :link_type, :password, :password_confirmation)
   end
 end

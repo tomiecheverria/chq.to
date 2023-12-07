@@ -31,6 +31,11 @@
   <%= f.password_field :password %>
 </div>
 
+<div class="field" id="password-confirmation-field" style="<%= 'display: none;' unless @link.link_type == 'private_link' %>">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
   <div class="actions">
     <%= f.submit @link.new_record? ? "Create Link" : "Editar Link" %>
   </div>
@@ -45,7 +50,8 @@
   document.addEventListener('turbo:load', function () {
   const linkTypeSelect = document.getElementById('link_type_select');
   const expirationDateField = document.getElementById('expiration-date-field');
-  const passwordField = document.getElementById('password-field'); // Cambiado a 'password-field'
+  const passwordField = document.getElementById('password-field'); 
+   const passwordConfirmationField = document.getElementById('password-confirmation-field');
 
   function toggleExpirationDateField() {
     expirationDateField.style.display = linkTypeSelect.value === 'temporary' ? 'block' : 'none';
@@ -54,6 +60,7 @@
 
   function togglePasswordField() {
     passwordField.style.display = linkTypeSelect.value === 'private_link' ? 'block' : 'none';
+    passwordConfirmationField.style.display = linkTypeSelect.value === 'private_link' ? 'block' : 'none';
   }
 
   linkTypeSelect.addEventListener('change', toggleExpirationDateField);
