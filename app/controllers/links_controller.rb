@@ -14,7 +14,7 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
     puts @link.id
     if @link.link_type.to_sym == :temporary && link_expired?(@link)
-      redirect_to '/404', status: :not_found
+      render status: :not_found, html: '', layout: 'application'
     end
   end
 
