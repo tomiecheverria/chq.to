@@ -23,7 +23,7 @@
 
   <div class="field" id="expiration-date-field" style="<%= 'display: none;' unless @link.link_type == 'temporary' %>">
     <%= f.label :expiration_date %>
-    <%= f.date_field :expiration_date %>
+    <%= f.datetime_field :expiration_date %>
   </div>
 
   <div class="field" id="password-field" style="<%= 'display: none;' unless @link.link_type == 'private_link' %>">

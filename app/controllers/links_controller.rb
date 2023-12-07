@@ -10,7 +10,12 @@ class LinksController < ApplicationController
   end
 
   def show
-    @link = Link.find_by(params[:id])
+    p params
+    @link = Link.find(params[:id])
+    puts @link.id
+    if @link.link_type.to_sym == :temporary && link_expired?(@link)
+      redirect_to '/404', status: :not_found
+    end
   end
 
   def create
@@ -68,5 +73,9 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:url, :expiration_date, :link_type, :password, :password_confirmation, :accessed)
+  end
+
+  def link_expired?(link)
+    link.expiration_date.present? && link.expiration_date < DateTime.current
   end
 end

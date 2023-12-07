@@ -21,19 +21,19 @@
 
     <dt class="col-sm-3 text-secondary">Updated At:</dt>
     <dd class="col-sm-9"><%= @link.updated_at %></dd>
+    <%= @link.link_type.to_sym %></dd>
+    <% case @link.link_type %>
+      <% when :temporary %>
+        <dt class="col-sm-3 text-secondary">Expiration Date:</dt>
+        <dd class="col-sm-9"><%= @link.expiration_date %></dd>
 
-    <% case @link.link_type.to_sym %>
-    <% when :temporary %>
-    <dt class="col-sm-3 text-secondary">Expiration Date:</dt>
-    <dd class="col-sm-9"><%= @link.expiration_date %></dd>
+      <% when :private_link %>
+        <dt class="col-sm-3 text-secondary">Password:</dt>
+        <dd class="col-sm-9"><%= @link.password %></dd>
 
-    <% when :private_link %>
-    <dt class="col-sm-3 text-secondary">Password:</dt>
-    <dd class="col-sm-9"><%= @link.password %></dd>
-
-    <% when :ephemeral %>
-    <dt class="col-sm-3 text-secondary">Accessed:</dt>
-    <dd class="col-sm-9"><%= @link.accessed ? 'Yes' : 'No' %></dd>
+      <% when :ephemeral %>
+        <dt class="col-sm-3 text-secondary">Accessed:</dt>
+        <dd class="col-sm-9"><%= @link.accessed ? 'Yes' : 'No' %></dd>
     <% end %>
   </dl>
 
