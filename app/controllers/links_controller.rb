@@ -68,7 +68,7 @@ class LinksController < ApplicationController
   def handle_expired_link
     p "handle_expired_link called"
     flash[:alert] = 'The link has expired'
-    redirect_to "/errors/not_found", status: :not_found
+    redirect_to errors_not_found_path, status: :temporary_redirect, allow_other_host: true
   end
 
   def redirect_to_link
