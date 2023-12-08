@@ -10,14 +10,7 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
-    if @link.link_type.to_sym == :temporary && link_expired?(@link)
-
-
-
-
-link_type.to_sym == :private_link
-      render '_show_private_link'
-    end
+    # if @link.link_type.to_sym == :temporary && link_expired?(@link)
   end
 
   def create
@@ -90,7 +83,7 @@ link_type.to_sym == :private_link
     params.require(:link).permit(:url, :expiration_date, :link_type, :password, :password_confirmation, :accessed)
   end
 
-  def link_expired?(link)
+  def expired?(link)
     link.expiration_date.present? && link.expiration_date < DateTime.current
   end
 end

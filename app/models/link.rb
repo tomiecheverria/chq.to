@@ -4,16 +4,21 @@ class Link < ApplicationRecord
 
   validates :url, presence: true, uniqueness: true, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
   validates :link_type, presence: true
-  validates :expiration_date, presence: true, if: -> { temporary? }
-  validate :expiration_date_cannot_be_in_the_past, if: -> { temporary? }
-  validate :expiration_date_cannot_be_too_far_in_the_future, if: -> { temporary? }
-  validates :password, length: { in: 3..20 }, if: -> { custom_private_link? }
-  validates :password_confirmation, presence: true, if: -> { custom_private_link? }
-  validate :password_match?, if: -> { custom_private_link? }
-  validates :accessed, inclusion: { in: [true, false] }, if: -> { custom_ehemeral? }
-
+  validates :expiration_date, presence: true, if: :temporary?
+  validate :expiration_date_cannot_be_in_the_past, if: :temporary?
+  validate :expiration_date_cannot_be_too_far_in_the_future, if: :temporary?
+  validates :password, length: { in: 3..20 }, if: :custom_private_link?
+  validates :password_confirmation, presence: true, if: :custom_private_link?
+  validate :password_match?, if: :custom_private_link?
+  validates :accessed, inclusion: { in: [true, false] }, if: :custom_ephemeral?
 
   before_validation :generate_unique_slug
+
+  scope :temporary, -> { where(link_type: :temporary) }
+
+  def expired?
+    expiration_date.present? && expiration_date < DateTime.current 
+  end
 
   private
 
@@ -48,12 +53,11 @@ class Link < ApplicationRecord
     link_type == 'private_link'
   end
 
-  def custom_ehemeral?
+  def custom_ephemeral?
     link_type == 'ephemeral'
   end
 
   def password_match?
     errors.add(:password_confirmation, "doesn't match password") if password != password_confirmation
   end
-
 end

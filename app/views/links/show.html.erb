@@ -25,6 +25,11 @@
       <% when :temporary %>
         <dt class="col-sm-3 text-secondary">Expiration Date:</dt>
         <dd class="col-sm-9"><%= @link.expiration_date %></dd>
+        <% if @link.expired? %> 
+          <dd class="col-sm-9 text-danger">Este enlace ha expirado.</dd>
+        <% else %>
+          <dd class="col-sm-9"><%= @link.expiration_date %></dd>
+        <% end %>
 
       <% when :private_link %>
         <dt class="col-sm-3 text-secondary">Password:</dt>
