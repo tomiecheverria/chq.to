@@ -50,7 +50,7 @@ link_type.to_sym == :private_link
     @link = current_user.links.find(params[:id])
     @link.destroy
     flash[:notice] = 'Link successfully deleted.'
-    redirect_to user_path(current_user), notice: "Link successfully deleted."
+    redirect_to user_path(current_user), notice: 'Link successfully created.'
   end
 
   def update_password
