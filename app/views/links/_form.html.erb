@@ -1,5 +1,5 @@
 
-<%= form_for @link, data: { turbo: false } do |f| %>
+<%= form_for @link do |f| %>
   <% if flash[:errors] %>
     <div id="error_explanation">
       <h2><%= pluralize(flash[:errors].count, "error") %> prohibited this link from being saved:</h2>
@@ -45,13 +45,12 @@
 
 <%= link_to 'Back', user_path(current_user) %>
 
-  <script>
- 
-  document.addEventListener( function () {
+<script>
+document.addEventListener('DOMContentLoaded', function () {
   const linkTypeSelect = document.getElementById('link_type_select');
   const expirationDateField = document.getElementById('expiration-date-field');
-  const passwordField = document.getElementById('password-field'); 
-   const passwordConfirmationField = document.getElementById('password-confirmation-field');
+  const passwordField = document.getElementById('password-field');
+  const passwordConfirmationField = document.getElementById('password-confirmation-field');
 
   function toggleExpirationDateField() {
     expirationDateField.style.display = linkTypeSelect.value === 'temporary' ? 'block' : 'none';
@@ -70,5 +69,4 @@
   toggleExpirationDateField();
   togglePasswordField();
 });
-
-  </script>
+</script>
