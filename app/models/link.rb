@@ -17,7 +17,11 @@ class Link < ApplicationRecord
   scope :temporary, -> { where(link_type: :temporary) }
 
   def expired?
-    expiration_date.present? && expiration_date < DateTime.current 
+    expiration_date.present? && expiration_date < DateTime.current
+  end
+
+  def temporary?
+    link_type == 'temporary'
   end
 
   private
@@ -43,10 +47,6 @@ class Link < ApplicationRecord
       slug_candidate = SecureRandom.urlsafe_base64(5)
       break slug_candidate unless self.class.exists?(slug: slug_candidate)
     end
-  end
-
-  def temporary?
-    link_type == 'temporary'
   end
 
   def custom_private_link?

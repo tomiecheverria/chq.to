@@ -49,27 +49,37 @@ class LinksController < ApplicationController
     @link = Link.find_by(slug: params[:slug])
 
     if @link
-      redirect_to @link.url, status: :moved_permanently, allow_other_host: true
+      handle_valid_link
     else
-      flash[:alert] = 'No se puede acceder al enlace.'
-      redirect_back fallback_location: root_path
+      handle_invalid_link
     end
-  end
-
-  def update_password
-    @link = Link.find(params[:id])
-    password = params[:link][:password]
-
-    if @link.password == password
-      flash[:notice] = 'Password updated successfully.'
-    else
-      flash[:errors] = ['Invalid password.']
-    end
-
-    redirect_to link_path(@link)
   end
 
   private
+
+  def handle_valid_link
+    if @link.temporary? && @link.expired?
+      handle_expired_link
+    else
+      redirect_to_link
+    end
+  end
+
+  def handle_expired_link
+    p "handle_expired_link called"
+    flash[:alert] = 'The link has expired'
+    redirect_to "/errors/not_found", status: :not_found
+  end
+
+  def redirect_to_link
+    p"handle_valid_link called"
+    redirect_to @link.url, status: :moved_permanently, allow_other_host: true
+  end
+
+  def handle_invalid_link
+    flash[:alert] = 'This link does not exist'
+    redirect_back fallback_location: root_path
+  end
 
   def build_link_with_type(params)
     puts params.inspect
