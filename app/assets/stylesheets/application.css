@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+ .expired-alert {
+    color: #721c24; /* Cambia el color del texto a rojo oscuro */
+    background-color: #f8d7da; /* Cambia el fondo a un tono rojo claro */
+    padding: 0.75rem; /* Añade un relleno para resaltar más la alerta */
+    border: 1px solid #f5c6cb; /* Añade un borde para enfatizar la alerta */
+    border-radius: 0.25rem; /* Añade bordes redondeados para mejorar el aspecto */
+  }
+  
