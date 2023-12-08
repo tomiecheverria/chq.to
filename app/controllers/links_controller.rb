@@ -45,6 +45,17 @@ class LinksController < ApplicationController
     redirect_to user_path(current_user), notice: 'Link successfully created.'
   end
 
+  def redirect
+    @link = Link.find_by(slug: params[:slug])
+
+    if @link
+      redirect_to @link.url, status: :moved_permanently, allow_other_host: true
+    else
+      flash[:alert] = 'No se puede acceder al enlace.'
+      redirect_back fallback_location: root_path
+    end
+  end
+
   def update_password
     @link = Link.find(params[:id])
     password = params[:link][:password]

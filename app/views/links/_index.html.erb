@@ -2,7 +2,7 @@
 
 <% @links.each do |link| %>
   <p>
-    <%= link_to build_link_url(link.slug), link.url %>
+    <%= link_to build_link_url(link.slug),  redirect_link_path(link.slug) %>
     <%= link.link_type.capitalize %>
     <%= link_to 'Show', link_path(link), class: 'btn btn-primary',data: { turbo: false } %>
     <%= link_to 'Edit', edit_link_path(link), class: 'btn btn-secondary' %>

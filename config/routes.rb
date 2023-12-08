@@ -3,11 +3,8 @@ Rails.application.routes.draw do
   get 'errors/internal_server_error'
   devise_for :users
   resource :user, only: [:show]
-  resources :links do
-    member do
-      patch 'update_password'
-    end
-  end
+  resources :links
+  get 'links/:slug/redirect', to: 'links#redirect', as: :redirect_link
 
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
