@@ -1,6 +1,6 @@
 // app/javascript/custom/link_form.js
 console.log("El archivo link_form.js se está ejecutando correctamente.");
-document.addEventListener('turbo:load', function () {
+document.addEventListener( function () {
   console.log("El archivo link_form.js se está ejecutando correctamente.");
   const linkTypeSelect = document.getElementById('link_type_select');
   const expirationDateField = document.getElementById('expiration-date-field');
