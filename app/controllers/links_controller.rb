@@ -41,7 +41,6 @@ link_type.to_sym == :private_link
       flash[:notice] = 'Link successfully updated.'
     else
       flash[:errors] = @link.errors.full_messages
-      # render :edit consultar porque no se pueded usar 
     end
     redirect_to edit_link_path(@link)
   end
