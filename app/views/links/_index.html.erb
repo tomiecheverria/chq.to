@@ -1,19 +1,16 @@
 <h1>All Links</h1>
 
 <% @links.each do |link| %>
-<p>
-  <%= link_to build_link_url(link.slug),  redirect_link_path(link.slug) %>
-  <%= link.link_type.capitalize %>
-  <%= link_to 'Show', link_path(link), class: 'btn btn-primary' %>
-  <%= link_to 'Edit', edit_link_path(link), class: 'btn btn-secondary' %>
-  <%= form_with(model: @link, local: true, method: :delete) do |form| %>
-  <%= form.csrf_token %>
-  <%= form.submit 'Delete' %>
-  <% end %>
+  <p>
+    <%= link_to build_link_url(link.slug),  redirect_link_path(link.slug) %>
+    <%= link.link_type.capitalize %>
+    <%= link_to 'Show', link_path(link), class: 'btn btn-primary',data: { turbo: false } %>
+    <%= link_to 'Edit', edit_link_path(link), class: 'btn btn-secondary' %>
+    <%= form_with(url: link, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-form') do |form| %>
+    <%= form.button 'Delete', class: 'btn btn-danger', type: 'submit' %>
+    <% end %>
 
-
-
-</p>
+  </p>
 <% end %>
 
 <%= link_to 'New Link', new_link_path, class: 'btn btn-primary' %>

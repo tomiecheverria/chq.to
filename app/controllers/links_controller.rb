@@ -41,8 +41,7 @@ class LinksController < ApplicationController
   def destroy
     @link = current_user.links.find(params[:id])
     @link.destroy
-    flash[:notice] = 'Link successfully deleted.'
-    redirect_to user_path(current_user), notice: 'Link successfully created.'
+    redirect_to user_path(current_user), notice: 'Link successfully Deleted.'
   end
 
   def redirect
@@ -68,7 +67,7 @@ class LinksController < ApplicationController
   def handle_expired_link
     p "handle_expired_link called"
     flash[:alert] = 'The link has expired'
-    redirect_to "/errors/not_found", status: :not_found
+    redirect_to root_path, status: :not_found
   end
 
   def redirect_to_link
