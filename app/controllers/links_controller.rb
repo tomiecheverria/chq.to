@@ -61,8 +61,13 @@ class LinksController < ApplicationController
       redirect_to_link
     else
       flash[:alert] = 'Invalid password'
-      render 'private_link_form'
+      redirect_to private_link_form_link_path(id: @link.id) , data: { turbo: false }
     end
+  end
+
+  def private_link_form
+    p "paso por private_link_form"
+    @link = Link.find(params[:id])
   end
 
   private
@@ -71,22 +76,16 @@ class LinksController < ApplicationController
     if @link.temporary? && @link.expired?
       handle_expired_link
     elsif @link.custom_private_link?
-      render 'private_link_form', locals: { link: @link }
+      redirect_to private_link_form_link_path(id: @link.id) , data: { turbo: false }
     else
       redirect_to_link
     end
   end
 
-  def private_link_form
-    p "paso por privat  link"
-    p params
-    @link = Link.find(params[:id])
-  end
-
   def password_matches?
     return false unless params[:password].present?
-
-    @link.correct_password?(params[:password])
+  
+    params[:password] == @link.password
   end
 
   def handle_expired_link
