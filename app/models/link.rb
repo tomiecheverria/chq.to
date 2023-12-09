@@ -15,9 +15,14 @@ class Link < ApplicationRecord
   before_validation :generate_unique_slug
 
   scope :temporary, -> { where(link_type: :temporary) }
+  around_save :set_time_zone, if: :temporary?
 
   def expired?
-    expiration_date.present? && expiration_date < DateTime.current
+    expiration_date.present? && expiration_date < DateTime.current.in_time_zone('America/Argentina/Buenos_Aires')
+  end
+
+  def set_time_zone(&block)
+    Time.use_zone('America/Argentina/Buenos_Aires', &block)
   end
 
   def temporary?
@@ -35,13 +40,13 @@ class Link < ApplicationRecord
   private
 
   def expiration_date_cannot_be_in_the_past
-    if expiration_date.present? && expiration_date < DateTime.current
+    if expiration_date.present? && expiration_date < DateTime.current.in_time_zone('America/Argentina/Buenos_Aires')
       errors.add(:expiration_date, "can't be in the past")
     end
   end
 
   def expiration_date_cannot_be_too_far_in_the_future
-    if expiration_date.present? && expiration_date > 1.year.from_now
+    if expiration_date.present? && expiration_date > 1.year.from_now.in_time_zone('America/Argentina/Buenos_Aires')
       errors.add(:expiration_date, "can't be more than 1 year in the future")
     end
   end

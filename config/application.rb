@@ -24,5 +24,7 @@ module ChqTo
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.exceptions_app = self.routes
+    config.time_zone = 'America/Argentina/Buenos_Aires'
+    config.active_record.default_timezone = :utc
   end
 end

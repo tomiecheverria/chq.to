@@ -31,9 +31,31 @@ module LinksHelper
       handle_expired_link
     elsif link.custom_private_link?
       redirect_to private_link_form_link_path(id: link.id), data: { turbo: false }
+    elsif link.custom_ephemeral?
+      handle_ephemeral_link(link)
     else
       redirect_to_link(link)
     end
+  end
+
+  def handle_ephemeral_link(link)
+    if link.accessed
+      handle_ephemeral_link_accessed(link)
+    else
+      link.update(accessed: true)
+      redirect_to_link(link)
+    end
+  end
+
+  def handle_ephemeral_link_accessed(link)
+    flash[:alert] = 'This ephemeral link has already been accessed and is no longer valid.'
+    render 'errors/not_found', status: :not_found
+  end
+end
+
+  def handle_expired_link
+    flash[:alert] = 'The link has expired'
+    render 'errors/not_found', status: :not_found
   end
 
   def password_matches?(password, link)
