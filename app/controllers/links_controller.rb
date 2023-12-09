@@ -66,13 +66,11 @@ class LinksController < ApplicationController
   end
 
   def handle_expired_link
-    p "handle_expired_link called"
     flash[:alert] = 'The link has expired'
-    redirect_to errors_not_found_path, status: :temporary_redirect, allow_other_host: true
+    render 'errors/not_found', status: :not_found
   end
 
   def redirect_to_link
-    p"handle_valid_link called"
     redirect_to @link.url, status: :moved_permanently, allow_other_host: true
   end
 
@@ -82,11 +80,9 @@ class LinksController < ApplicationController
   end
 
   def build_link_with_type(params)
-    puts params.inspect
     link = current_user.links.build(params)
     link.link_type = link_type_from_params(params[:link_type])
     link.password_confirmation = params[:password_confirmation] if link.private_link?
-    p "link #{link.link_type}"
     link
   end
 

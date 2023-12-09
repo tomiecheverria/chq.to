@@ -27,7 +27,7 @@ class Link < ApplicationRecord
   private
 
   def expiration_date_cannot_be_in_the_past
-    if expiration_date.present? && expiration_date < Date.today
+    if expiration_date.present? && expiration_date < DateTime.current
       errors.add(:expiration_date, "can't be in the past")
     end
   end
