@@ -24,6 +24,14 @@ class Link < ApplicationRecord
     link_type == 'temporary'
   end
 
+  def custom_private_link?
+    link_type == 'private_link'
+  end
+
+  def custom_ephemeral?
+    link_type == 'ephemeral'
+  end
+
   private
 
   def expiration_date_cannot_be_in_the_past
@@ -47,14 +55,6 @@ class Link < ApplicationRecord
       slug_candidate = SecureRandom.urlsafe_base64(5)
       break slug_candidate unless self.class.exists?(slug: slug_candidate)
     end
-  end
-
-  def custom_private_link?
-    link_type == 'private_link'
-  end
-
-  def custom_ephemeral?
-    link_type == 'ephemeral'
   end
 
   def password_match?

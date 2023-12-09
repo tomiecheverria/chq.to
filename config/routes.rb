@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   get 'errors/internal_server_error'
   devise_for :users
   resource :user, only: [:show]
-  resources :links
+  resources :links do 
+    member do
+      get 'private_link_form', as: :private_link_form
+      post 'handle_private_link_form'
+    end
+  end
   get 'links/:slug/redirect', to: 'links#redirect', as: :redirect_link
 
   match "/404", to: "errors#not_found", via: :all

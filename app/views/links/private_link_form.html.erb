@@ -1,0 +1,12 @@
+<!-- app/views/links/private_link_form.html.erb -->
+<h1>Enter Password</h1>
+<%= form_with(url: handle_private_link_form_link_path(@link), method: :post, data: { turbo: false }) do |form| %>
+
+  <div>
+    <%= form.label :password, 'Password' %>
+    <%= form.password_field :password %>
+  </div>
+  <div>
+    <%= form.submit 'Submit' %>
+  </div>
+<% end %>

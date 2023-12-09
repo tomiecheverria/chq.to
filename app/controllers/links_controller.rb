@@ -10,7 +10,7 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
-    # if @link.link_type.to_sym == :temporary && link_expired?(@link)
+
   end
 
   def create
@@ -55,14 +55,38 @@ class LinksController < ApplicationController
     end
   end
 
+  def handle_private_link_form
+    @link = Link.find(params[:id])
+    if password_matches?
+      redirect_to_link
+    else
+      flash[:alert] = 'Invalid password'
+      render 'private_link_form'
+    end
+  end
+
   private
 
   def handle_valid_link
     if @link.temporary? && @link.expired?
       handle_expired_link
+    elsif @link.custom_private_link?
+      render 'private_link_form', locals: { link: @link }
     else
       redirect_to_link
     end
+  end
+
+  def private_link_form
+    p "paso por privat  link"
+    p params
+    @link = Link.find(params[:id])
+  end
+
+  def password_matches?
+    return false unless params[:password].present?
+
+    @link.correct_password?(params[:password])
   end
 
   def handle_expired_link
@@ -100,7 +124,4 @@ class LinksController < ApplicationController
     params.require(:link).permit(:url, :expiration_date, :link_type, :password, :password_confirmation, :accessed)
   end
 
-  def expired?(link)
-    link.expiration_date.present? && link.expiration_date < DateTime.current
-  end
 end
