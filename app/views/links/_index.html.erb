@@ -6,7 +6,8 @@
     <%= link.link_type.capitalize %>
     <%= link_to 'Show', link_path(link), class: 'btn btn-primary',data: { turbo: false } %>
     <%= link_to 'Edit', edit_link_path(link), class: 'btn btn-secondary' %>
-    <%= button_to 'Delete', link, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <%= link_to 'Delete', link, method: :delete, data: { turbo_method: :delete,turbo_confirm:'Are you sure' }, class: 'btn btn-danger'%>
+
 
   </p>
 <% end %>
