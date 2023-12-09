@@ -26,11 +26,8 @@
         <dt class="col-sm-3 text-secondary">Expiration Date:</dt>
         <dd class="col-sm-9"><%= @link.expiration_date %></dd>
         <% if @link.expired? %> 
-          <dd class="col-sm-9 expired-alert">Este enlace ha expirado.</dd>
+          <dd class="col-sm-9 expired-alert">This link has expired.</dd>
         <% end %>
-        
-
-
       <% when :private_link %>
         <dt class="col-sm-3 text-secondary">Password:</dt>
         <dd class="col-sm-9"><%= @link.password %></dd>
@@ -38,6 +35,10 @@
       <% when :ephemeral %>
         <dt class="col-sm-3 text-secondary">Accessed:</dt>
         <dd class="col-sm-9"><%= @link.accessed ? 'Yes' : 'No' %></dd>
+        <% if @link.accessed? %> 
+          <dd class="col-sm-9 expired-alert">This link has already been accessed</dd>
+          <%= link_to 'Reset Ephemeral Link', reset_ephemeral_link_link_path(@link), method: :patch, data: { confirm: 'Are you sure you want to reset this ephemeral link?' } %>
+        <% end %>
     <% end %>
   </dl>
 

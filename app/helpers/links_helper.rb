@@ -43,7 +43,8 @@ module LinksHelper
       handle_ephemeral_link_accessed(link)
     else
       link.update(accessed: true)
-      redirect_to_link(link)
+      p "se  deberia redirigir al link efimero"
+      redirect_to link.url, status: :moved_permanently, allow_other_host: true
     end
   end
 
@@ -51,7 +52,6 @@ module LinksHelper
     flash[:alert] = 'This ephemeral link has already been accessed and is no longer valid.'
     render 'errors/not_found', status: :not_found
   end
-end
 
   def handle_expired_link
     flash[:alert] = 'The link has expired'
