@@ -21,4 +21,22 @@
     border: 1px solid #f5c6cb; /* Añade un borde para enfatizar la alerta */
     border-radius: 0.25rem; /* Añade bordes redondeados para mejorar el aspecto */
   }
-  
+
+  /* Estilo para el botón */
+.btn-style {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Estilo para el enlace */
+.link-style {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link-style:hover {
+  text-decoration: underline;
+}

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     member do
       get 'private_link_form', as: :private_link_form
       post 'handle_private_link_form'
+      patch 'reset_ephemeral_link'
     end
   end
   get 'links/:slug/redirect', to: 'links#redirect', as: :redirect_link

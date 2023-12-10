@@ -37,7 +37,13 @@
         <dd class="col-sm-9"><%= @link.accessed ? 'Yes' : 'No' %></dd>
         <% if @link.accessed? %> 
           <dd class="col-sm-9 expired-alert">This link has already been accessed</dd>
-          <%= link_to 'Reset Ephemeral Link', reset_ephemeral_link_link_path(@link), method: :patch, data: { confirm: 'Are you sure you want to reset this ephemeral link?' } %>
+          <%= link_to 'Reset Ephemeral Link',
+            reset_ephemeral_link_link_path(@link),
+            method: :patch,
+            remote: true,
+            data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' },
+            class: 'btn btn-warning',
+            'data-turbo-frame': 'your-turbo-frame-id' %>
         <% end %>
     <% end %>
   </dl>

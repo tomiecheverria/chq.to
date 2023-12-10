@@ -2,6 +2,7 @@ class LinksController < ApplicationController
   include LinksHelper
   before_action :authenticate_user!
   before_action :find_link, only: [:show, :edit, :update, :destroy]
+  
 
   def index
     @links = current_user.links
@@ -45,6 +46,18 @@ class LinksController < ApplicationController
 
   def private_link_form
     @link = Link.find(params[:id])
+  end
+
+  def reset_ephemeral_link
+    @link = find_link
+
+    if @link.update(accessed: false)
+      flash[:notice] = 'Ephemeral link has been reset and can be accessed again.'
+    else
+      flash[:alert] = 'Failed to reset ephemeral link.'
+    end
+
+    redirect_to link_path(@link)
   end
 
   private
