@@ -5,7 +5,7 @@ class LinksController < ApplicationController
   before_action :find_link, only: %i[show edit update destroy]
 
   def index
-    @links = current_user.links.paginate(page: params[:page], per_page: 4)
+    @links = current_user.links.paginate(page: params[:page], per_page: 5)
   end
 
   def new

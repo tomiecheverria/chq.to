@@ -42,24 +42,26 @@
           <li class="nav-item">
             <% if user_signed_in? %>
             <div class="nav-link"> Welcome <%= current_user.email %> </div>
-            <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-lg mx-2 rounded-pill shadow' %>
             <% else %>
-            <%= button_to "Sign in", new_user_session_path %>
+            <%= button_to "Sign in", new_user_session_path, class: 'btn btn-primary btn-lg mx-2 rounded-pill shadow' %>
             <% end %>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
-              Dropdown
+              Menu
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% if user_signed_in? %>
               <li class="nav-item">
                 <%= link_to 'Profile', user_path(current_user), class: 'dropdown-item' %>
               </li>
+              <li class="nav-item">
+               <%=  button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+              </li>
               <% end %>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              
             </ul>
           </li>
         </ul>

@@ -4,20 +4,60 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="chqto page" />
-    <meta name="author" content="tomas" />
-    <title>Welcome to chq.to: Easy app to create and manage links</title>
+    <meta name="description" content="chq.to - Easy app to create and manage short links" />
+    <meta name="author" content="Tomas" />
+    <title>Welcome to chq.to</title>
+
 </head>
 
 <body>
-    <!-- Page content-->
+
     <div class="container">
         <div class="text-center mt-5">
-            <h1>A Bootstrap 5 Starter Template</h1>
-            <p class="lead">A complete project boilerplate built with Bootstrap</p>
-            <p>Bootstrap v5.2.3</p>
+            <h1>Welcome to chq.to</h1>
+            <p class="lead">An easy-to-use web application for creating and managing short links</p>
+            <p>Developed by Tomas</p>
+            <p>This page is a starting point for your chq.to project. Feel free to customize it to suit your needs.</p>
+
+            <h2>Features:</h2>
+            <ul>
+                <li>Authentication and registration (see User Management section).</li>
+                <li>Creation and management of short links (see Link Management section).</li>
+                <li>Access to short links (see Access to Links section).</li>
+                <li>Reports on link statistics (see Reports on Links section).</li>
+            </ul>
+
+            <h2>Links:</h2>
+
+            <!-- Mostrar links regulares -->
+            <h3>Regular Links:</h3>
+            <% @regular_links.each do |link| %>
+            <%= link_to link.url, link_path(link) %><br>
+            <% end %>
+
+            <!-- Mostrar links temporales -->
+            <h3>Temporary Links:</h3>
+            <% @temporary_links.each do |link| %>
+            <%= link_to link.url, link_path(link) %><br>
+            <% end %>
+
+            <!-- Mostrar links privados -->
+            <h3>Private Links:</h3>
+            <% @private_links.each do |link| %>
+            <%= link_to link.url, link_path(link) %><br>
+            <% end %>
+
+            <!-- Mostrar links efímeros -->
+            <h3>Ephemeral Links:</h3>
+            <% @ephemeral_links.each do |link| %>
+            <%= link_to link.url, link_path(link) %><br>
+            <% end %>
+
+
         </div>
     </div>
+
+
 </body>
 
 </html>
