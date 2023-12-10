@@ -1,8 +1,7 @@
-
-<%= form_for @link, data: { turbo: false } do |f| %>
+<%= form_for @link, data: { turbo: false }, class: "mt-4" do |f| %>
   <% if flash[:errors] %>
-    <div id="error_explanation">
-      <h2><%= pluralize(flash[:errors].count, "error") %> prohibited this link from being saved:</h2>
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading"><%= pluralize(flash[:errors].count, "error") %> prohibited this link from being saved:</h4>
       <ul>
         <% flash[:errors].each do |message| %>
           <li><%= message %></li>
@@ -11,69 +10,63 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :url %>
-    <%= f.text_field :url %>
+  <div class="mb-3">
+    <%= f.label :url, class: "form-label" %>
+    <%= f.text_field :url, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class="mb-3">
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="field" >
-    <%= f.label :link_type %>
-    <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, type] }, {}, id: 'link_type_select' %>
+  <div class="mb-3">
+    <%= f.label :link_type, class: "form-label" %>
+    <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, type] }, {}, id: 'link_type_select', class: "form-select" %>
   </div>
 
-  <div class="field" id="expiration-date-field" style="<%= 'display: none;' unless @link.link_type == 'temporary' %>">
-    <%= f.label :expiration_date %>
-    <%= f.datetime_field :expiration_date %>
+  <div class="mb-3" id="expiration-date-field" style="<%= 'display: none;' unless @link.link_type == 'temporary' %>">
+    <%= f.label :expiration_date, class: "form-label" %>
+    <%= f.datetime_field :expiration_date, class: "form-control" %>
   </div>
 
-  <div class="field" id="password-field" style="<%= 'display: none;' unless @link.link_type == 'private_link' %>">
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-</div>
-
-<div class="field" id="password-confirmation-field" style="<%= 'display: none;' unless @link.link_type == 'private_link' %>">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+  <div class="mb-3" id="password-field" style="<%= 'display: none;' unless @link.link_type == 'private_link' %>">
+    <%= f.label :password, class: "form-label" %>
+    <%= f.password_field :password, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit @link.new_record? ? "Create Link" : "Edit link" %>
+  <div class="mb-3" id="password-confirmation-field" style="<%= 'display: none;' unless @link.link_type == 'private_link' %>">
+    <%= f.label :password_confirmation, class: "form-label" %>
+    <%= f.password_field :password_confirmation, class: "form-control" %>
   </div>
 
+  <div class="mb-3">
+    <%= f.submit @link.new_record? ? "Create Link" : "Edit Link", class: "btn btn-primary" %>
+  </div>
 <% end %>
 
+<%= link_to 'Back', user_path(current_user), class: "btn btn-secondary" %>
 
-<%= link_to 'Back', user_path(current_user) %>
-
-  <script>
- 
+<script>
   document.addEventListener('turbo:load', function () {
-  const linkTypeSelect = document.getElementById('link_type_select');
-  const expirationDateField = document.getElementById('expiration-date-field');
-  const passwordField = document.getElementById('password-field'); 
-   const passwordConfirmationField = document.getElementById('password-confirmation-field');
+    const linkTypeSelect = document.getElementById('link_type_select');
+    const expirationDateField = document.getElementById('expiration-date-field');
+    const passwordField = document.getElementById('password-field');
+    const passwordConfirmationField = document.getElementById('password-confirmation-field');
 
-  function toggleExpirationDateField() {
-    expirationDateField.style.display = linkTypeSelect.value === 'temporary' ? 'block' : 'none';
-    console.log(linkTypeSelect.value);
-  }
+    function toggleExpirationDateField() {
+      expirationDateField.style.display = linkTypeSelect.value === 'temporary' ? 'block' : 'none';
+    }
 
-  function togglePasswordField() {
-    passwordField.style.display = linkTypeSelect.value === 'private_link' ? 'block' : 'none';
-    passwordConfirmationField.style.display = linkTypeSelect.value === 'private_link' ? 'block' : 'none';
-  }
+    function togglePasswordField() {
+      passwordField.style.display = linkTypeSelect.value === 'private_link' ? 'block' : 'none';
+      passwordConfirmationField.style.display = linkTypeSelect.value === 'private_link' ? 'block' : 'none';
+    }
 
-  linkTypeSelect.addEventListener('change', toggleExpirationDateField);
-  linkTypeSelect.addEventListener('change', togglePasswordField);
+    linkTypeSelect.addEventListener('change', toggleExpirationDateField);
+    linkTypeSelect.addEventListener('change', togglePasswordField);
 
-  // Llama a las funciones una vez al cargar la página para establecer el estado inicial
-  toggleExpirationDateField();
-  togglePasswordField();
-});
-
-  </script>
+    toggleExpirationDateField();
+    togglePasswordField();
+  });
+</script>
