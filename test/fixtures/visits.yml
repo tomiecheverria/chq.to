@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  link: one
+  accessed_at: 2023-12-09 21:26:42
+  ip_address: MyString
+
+two:
+  link: two
+  accessed_at: 2023-12-09 21:26:42
+  ip_address: MyString
