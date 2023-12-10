@@ -1,8 +1,9 @@
 class Link < ApplicationRecord
   belongs_to :user
-  has_many :visits
+  has_many :visits, dependent: :destroy
   enum link_type: { regular: 0, temporary: 1, private_link: 2, ephemeral: 3 }
 
+  validates :name, presence: true
   validates :url, presence: true, uniqueness: true, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
   validates :link_type, presence: true
   validates :expiration_date, presence: true, if: :temporary?
