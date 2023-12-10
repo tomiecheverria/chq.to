@@ -1,8 +1,8 @@
 class LinksController < ApplicationController
   include LinksHelper
   include WillPaginate::CollectionMethods
-  before_action :authenticate_user!, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  before_action :find_link, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: %i[index new create show edit update destroy]
+  before_action :find_link, only: %i[show edit update destroy]
 
   def index
     @links = current_user.links.paginate(page: params[:page], per_page: 4)
@@ -18,7 +18,7 @@ class LinksController < ApplicationController
   end
 
   def show
-    @link_visits = @link.visits.paginate(page: params[:visit_page], per_page: 5)
+    @link_visits = filtered_visits(@link, params)
   end
 
   def edit; end

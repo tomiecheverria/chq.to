@@ -1,4 +1,24 @@
 <!-- app/views/links/_visits_table.html.erb -->
+
+<%= form_tag link_path(@link), method: :get do %>
+  <div class="form-group">
+    <%= label_tag 'filter_ip', 'Filter by IP:' %>
+    <%= text_field_tag 'filter_ip', params[:filter_ip], class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag 'start_date', 'Start Date:' %>
+    <%= date_field_tag 'start_date', params[:start_date], class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag 'end_date', 'End Date:' %>
+    <%= date_field_tag 'end_date', params[:end_date], class: 'form-control' %>
+  </div>
+
+  <%= submit_tag 'Apply Filters', class: 'btn btn-primary' %>
+<% end %>
+
 <% if @link_visits.any? %>
   <h2 class="mt-4 text-primary">Visits</h2>
 
@@ -12,21 +32,12 @@
         </tr>
       </thead>
       <tbody>
-        <% daily_visits_count = @link.daily_visits_count %>
-        <% daily_visits_count.each do |date, count| %>
+        <% @link_visits.each do |visit| %>
           <tr>
-            <td colspan="3" class="bg-info text-white">
-              <strong><%= date %></strong>
-              (<%= count %> visitas)
-            </td>
+            <td><%= visit.id %></td>
+            <td><%= visit.accessed_at %></td>
+            <td><%= visit.ip_address %></td>
           </tr>
-          <% @link_visits.select { |visit| visit.accessed_at.to_date == date }.each do |visit| %>
-            <tr>
-              <td><%= visit.id %></td>
-              <td><%= visit.accessed_at %></td>
-              <td><%= visit.ip_address %></td>
-            </tr>
-          <% end %>
         <% end %>
       </tbody>
     </table>
