@@ -18,6 +18,11 @@ class Link < ApplicationRecord
   scope :temporary, -> { where(link_type: :temporary) }
   around_save :set_time_zone, if: :temporary?
 
+  def daily_visits_count
+    self.visits.group_by { |visit| visit.accessed_at.to_date }
+               .transform_values(&:count)
+  end
+
   def expired?
     expiration_date.present? && expiration_date < DateTime.current.in_time_zone('America/Argentina/Buenos_Aires')
   end
