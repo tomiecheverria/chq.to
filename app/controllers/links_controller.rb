@@ -2,7 +2,6 @@ class LinksController < ApplicationController
   include LinksHelper
   before_action :authenticate_user!
   before_action :find_link, only: [:show, :edit, :update, :destroy]
-  
 
   def index
     @links = current_user.links

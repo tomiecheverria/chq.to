@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       patch 'reset_ephemeral_link'
     end
   end
-  get 'links/:slug/redirect', to: 'links#redirect', as: :redirect_link
+  get '/l/:slug', to: 'links#redirect', as: :redirect_link
 
   match "/404", to: "errors#not_found", via: :all
   match "/403", to: "errors#forbidden", via: :all
