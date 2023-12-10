@@ -108,14 +108,4 @@ module LinksHelper
     }
     type_mapping[type_param]
   end
-
-  def filtered_visits(link, params)
-    visits = link.visits.where('ip_address LIKE ?', "%#{params[:filter_ip]}%") if params[:filter_ip].present?
-    if params[:start_date].present? && params[:end_date].present?
-      start_date = params[:start_date].to_date
-      end_date = params[:end_date].to_date.end_of_day
-      visits = visits.where(accessed_at: start_date..end_date)
-    end
-    visits.paginate(page: params[:visit_page], per_page: 5)
-  end
 end
