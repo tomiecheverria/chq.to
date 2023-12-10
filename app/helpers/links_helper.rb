@@ -59,6 +59,7 @@ module LinksHelper
 
   def password_matches?(password, link)
     return false unless password.present?
+
     password == link.password
   end
 
