@@ -80,3 +80,13 @@ a {
 a:hover {
   text-decoration: underline; /* Subrayado al pasar el mouse por los enlaces */
 }
+
+.total-visits {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff; /* Cambia el color según tus preferencias */
+  border: 2px solid #007bff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
