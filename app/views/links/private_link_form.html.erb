@@ -1,13 +1,38 @@
-<!-- app/views/links/private_link_form.html.erb -->
-<h1>Enter Password</h1>
-<!-- En lugar de usar TurboFrame -->
-<%= form_with(url: handle_private_link_form_link_path(@link), method: :post, data: { turbo: false }) do |form| %>
+<div class="container mt-5">
+  <h1 class="mb-4">Enter Password</h1>
 
-  <div>
-    <%= form.label :password, 'Password' %>
-    <%= form.password_field :password %>
-  </div>
-  <div>
-    <%= form.submit 'Submit' %>
-  </div>
-<% end %>
+  <%= form_with(url: handle_private_link_form_link_path(@link), method: :post, data: { turbo: false }) do |form| %>
+    <div class="mb-3">
+      <%= form.label :password, 'Password', class: 'form-label' %>
+      <%= form.password_field :password, class: 'form-control', id: 'password-input' %>
+    </div>
+
+    <div class="mb-3 form-check">
+      <%= form.check_box :show_password, class: 'form-check-input', id: 'show-password-checkbox' %>
+      <%= form.label :show_password, 'Show Password', class: 'form-check-label' %>
+    </div>
+
+    <div class="d-grid gap-2 col-6 mx-auto mt-4">
+      <%= form.submit 'Submit', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <script>
+    document.addEventListener('turbo:load', function () {
+      const passwordInput = document.getElementById('password-input');
+      const showPasswordCheckbox = document.getElementById('show-password-checkbox');
+
+      function togglePasswordVisibility() {
+        if (passwordInput) {
+          passwordInput.type = showPasswordCheckbox.checked ? 'text' : 'password';
+        }
+      }
+
+      if (showPasswordCheckbox) {
+        showPasswordCheckbox.addEventListener('change', togglePasswordVisibility);
+        
+        togglePasswordVisibility();
+      }
+    });
+  </script>
+</div>
