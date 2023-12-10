@@ -34,7 +34,7 @@ module LinksHelper
     elsif link.custom_ephemeral?
       handle_ephemeral_link(link)
     else
-      redirect_to_link(link)
+      create_and_redirect_to_link(link)
     end
   end
 
@@ -43,7 +43,7 @@ module LinksHelper
       handle_ephemeral_link_accessed(link)
     else
       link.update(accessed: true)
-      redirect_to_link(link)
+      create_and_redirect_to_link(link)
     end
   end
 
@@ -61,6 +61,20 @@ module LinksHelper
     return false unless password.present?
 
     password == link.password
+  end
+
+  def create_and_redirect_to_link(link)
+    visit = link.visits.new(
+      accessed_at: Time.current,
+      ip_address: request.remote_ip
+    )
+
+    if link.save && visit.save
+      redirect_to_link(link)
+    else
+      flash[:error] = 'Error creating link or visit'
+      redirect_back fallback_location: root_path
+    end
   end
 
   def redirect_to_link(link)

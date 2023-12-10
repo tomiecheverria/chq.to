@@ -41,7 +41,7 @@ class LinksController < ApplicationController
 
   def handle_private_link_form
     @link = Link.find(params[:id])
-    password_matches?(params[:password], @link) ? redirect_to_link(@link) : handle_invalid_password(@link)
+    password_matches?(params[:password], @link) ? create_and_redirect_to_link(@link) : handle_invalid_password(@link)
   end
 
   def private_link_form
