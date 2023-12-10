@@ -44,7 +44,7 @@ gem "bootsnap", require: false
 gem 'devise'
 gem "ruby-lsp"
 gem "rubocop"
-
+gem 'will_paginate'
 
 
 

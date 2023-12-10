@@ -11,5 +11,6 @@
     <%= link_to 'Delete', link, method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure' }, class: 'btn btn-danger mr-2' %>
   </div>
 <% end %>
+<%= will_paginate @links %>
 
 <%= link_to 'New Link', new_link_path, class: 'btn btn-primary' %>
