@@ -1,4 +1,5 @@
 class VisitController < ApplicationController
+  include WillPaginate::CollectionMethods
   before_action :set_link
 
   def create
@@ -20,3 +21,4 @@ class VisitController < ApplicationController
     @link = Link.find(params[:link_id])
   end
 end
+

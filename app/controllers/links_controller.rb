@@ -17,7 +17,9 @@ class LinksController < ApplicationController
     save_or_redirect(@link, 'Link successfully created.', user_path(current_user), new_link_path)
   end
 
-  def show; end
+  def show
+    @link_visits = @link.visits.paginate(page: params[:visit_page], per_page: 5)
+  end
 
   def edit; end
 
