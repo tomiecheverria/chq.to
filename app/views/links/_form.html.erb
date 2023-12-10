@@ -16,6 +16,11 @@
     <%= f.text_field :url %>
   </div>
 
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
   <div class="field" >
     <%= f.label :link_type %>
     <%= f.select :link_type, Link.link_types.keys.map { |type| [type.capitalize, type] }, {}, id: 'link_type_select' %>

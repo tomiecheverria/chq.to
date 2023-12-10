@@ -80,6 +80,6 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:url, :expiration_date, :link_type, :password, :password_confirmation, :accessed)
+    params.require(:link).permit(:url, :expiration_date, :link_type, :password, :password_confirmation, :accessed, :name)
   end
 end
