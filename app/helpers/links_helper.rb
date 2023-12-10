@@ -43,7 +43,7 @@ module LinksHelper
       handle_ephemeral_link_accessed(link)
     else
       link.update(accessed: true)
-      redirect_to link.url, allow_other_host: true
+      redirect_to_link(link)
     end
   end
 
