@@ -40,3 +40,8 @@
 .link-style:hover {
   text-decoration: underline;
 }
+
+.selectable-button {
+  user-select: auto;
+  user-select: text;
+}
