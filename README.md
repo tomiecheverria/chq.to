@@ -194,8 +194,7 @@ Todos los links se puede acceder publicamete, lo que sigfnifica que si se tiene 
 Solo el dueño o creador el link puede ver las estadisticas y detalle del link publico , borrar el link o editarlo. 
 En conclusion el usuario publico solo puede ver el home principal de las paginas y acceder al link publico.
 
-En el caso en el que se intente acceder a alguna funcion del link privada del usuario dueño como es la edicion o borrar el link , sera redirigido a la pagina de login. 
-
+En el caso en el que se intente acceder a alguna funcion del link privada del usuario dueño como es la edicion o borrar el link , sera redirigido a la pagina de login en el caso de no tener estar autenticado. En el caso de tener una esion abierta y no ser el duño del link sera redirigido al home.
 
 Se puede iniciar sesion desde el menu con la opcion de sigin in.
 
@@ -215,10 +214,26 @@ Cada usuario tiene cargado 2 links de cada tipo, teninedo un total de 8 links pa
 **Link publicos:**
 Una vez iniciada sesion se tiene disponible el acceso a las funcionalidades del menu donde se puede o cerrar sesion o ir al perfil para manejarlo.
 La vista de perfil solo puede ser accedida si el usuario esta autenticado correctamente. 
+Si se cumplen las condiciones para las redireccciones , se registra una visita con la direcccionj de ip y la fecha y hora.
+En el caso en el que no se cumpla los criterios no se hara la redireccion y no se contara como visita
+Si la redireccion es exitosa , ademas de redirigir se registra la visita acordemente y se responde con el codigo de respueta apropiado de 302.
+En el caso de que se intente acceder a un link  publico cuyo slug sea invalido , se redirecciona a home con el metodo del link no existe. 
+**Creacion de links**: 
+si un usuario esta auntenticado puede crear un link, en donde se especifica la url pirvada o larga a la que el link publico redirecciona , un nombre del link que puede estar en blanco o tener entre 3 y 40 caracteres. En caso de dejar en blanco tendra el nombre de Unnamed link. 
 
+Ademas se necesitara especificar el tipo con los atributos correspondiente al tipo.
+**Tipos de links**
 Existen 4 tipos distintos de links :
 
-Los links regulares son lin
+Los links regulares son links que se pueden acceder sin restriccion alguna  y no tienen ningun atributo en especial
+
+los links temporales son los links que poseen un atributo de fecha de vencimiento. se puede acceder al link siempre que no este vencido , pasada la fecha de vencimiento el link sigue exisitiendo , por lo que se puede hacer todas las acciones de cualquier otro link como show o delete, pero la redireccion no funcionara y devolvera un error 404 por la request ademas de redigir a la vista con error de 404. La fecha de expiracion no puede ser pasada y tampoco puede ser mas de 1 año en adelante.
+
+los links privados son links que cuando se intenten acceder se solicitara una contraseña , en la que en caso de ser correcta se redireccionara al link , y en caso de fallar , se puede volver a intentar tantas veces como se necesite. Si no coincide no se redirecciona. La password tiene que ser entre 3 y 20 caracteres  y debe de matchear o ser igual a password confirmation. 
+
+los links efimeros son links que solo se puede acceder 1 sola vez y se tiene el atributo de accesssed indicando false si no se accedio y true en el caso contrario. si ya se accedio y se vuelve a intentar , redirige a la vista de error 403 con un codigo de respuesta 403 y  no se contavbiliza la visita. El dueño del link puede resetear el valor de accessed en el show del link si es que el link ya fue accedido , por lo que es posible tener mas de una visita asociada a este link. Por defualt el link efimero se crea sin accessos  , por lo que se puede acceder cuando es creado.
+
+
 
 En la vista de perfil se puede editar los datos del perfil o cancelar la cuenta.
 en editar perfil puede cambiar todos sus atrbiutos incluyendo cambiar la contraseña.
