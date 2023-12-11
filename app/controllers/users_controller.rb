@@ -4,6 +4,6 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    @links = @user.links.paginate(page: params[:page], per_page: 4)
+    @links = @user.links.paginate(page: params[:page], per_page: 5)
   end
 end
