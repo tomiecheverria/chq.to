@@ -220,6 +220,11 @@ En el show se puede ver los detalles del link con todos sus atributos incluyendo
 
 Admeas se ve un listado de vistas, en donde cada vista posee la fecha y direccion de ip . Se puede filtrar por rango de fechas o por ip. Se muestra un resumen de visitas por dia y el total de visitas para el link.
 
+Tambien se puede editar el link en donde se podran editar todos los atributos incluyendo el tipo y el atributo relacionado con el tipo. 
+
+Finalmente se puede borrar el link , en donde se borrara el link junto con todas las visitas relacionadas a ese link.
+
+Finalmete se puede cerrra sesion tanto por el menu como por el boton de cerrar sesion.
 
 
 
