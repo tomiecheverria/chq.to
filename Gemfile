@@ -45,6 +45,8 @@ gem 'devise'
 gem "ruby-lsp"
 gem "rubocop"
 gem 'will_paginate'
+gem 'faker'
+
 
 
 
