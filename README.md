@@ -185,6 +185,9 @@ Ademas posee de una consola de ruby con rails c en donde tiene todos los datos y
 puede manipular los datos de la base de datos con rails dbconsole 
 
 
+### Acceso a la aplicacion 
+Una vez inicializada la aplicacion , se mostrara el home con varios links , como usuario no logueado lo unico que puede hacer es ver los links del home y acceder a los links si es que cumple con los requsitos necesarios.
+
 * Ruby version
 
 * System dependencies
