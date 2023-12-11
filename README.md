@@ -188,6 +188,47 @@ puede manipular los datos de la base de datos con rails dbconsole
 ### Acceso a la aplicacion 
 Una vez inicializada la aplicacion , se mostrara el home con varios links , como usuario no logueado lo unico que puede hacer es ver los links del home y acceder a los links si es que cumple con los requsitos necesarios.
 
+Las caracteristicas de cada link estaran especificadas en el apartado de caracteristicas. 
+
+Se puede iniciar sesion desde el menu con la opcion de sigin in.
+
+Puede iniciar seesion con algunos de los usuarios ya provistos o crear un usuario nuevo con un mail contraseña y nombre de usuario. 
+
+1. **Usuarios disponibles:**
+Ambos usuarios tienen la misma cantidad de links creados con la misma cantidad de visitas en cada link 
+* usuario1 : 
+email: user1@example.com
+password: password123
+
+* usuario 2:
+email: user2@example.com
+password: password456
+
+Cada usuario tiene cargado 2 links de cada tipo, teninedo un total de 8 links para cada usuario con 20 visitas para cada link. 
+
+Una vez iniciada sesion se tiene disponible el acceso a las funcionalidades del menu donde se puede o cerrar sesion o ir al perfil para manejarlo.
+La vista de perfil solo puede ser accedida si el usuario esta autenticado correctamente. 
+
+En la vista de perfil se puede editar los datos del perfil o cancelar la cuenta. 
+* WARNING: borrar el perfil borrara tambien todos los links asociados a esa cuenta y tambien todas las visitas asociadas a  todos los links
+En la vista de perfil es posible tambien crear nuevos links selecccionando el tipo de linlk , mas detalles en el apartado de caracteristicas. 
+Una vez creado el link se puede ver el link publico acortado , en el cual si se selecciona se hace la redireccion a la url privada o larga, si es que se cumple los criterios. La url publica es como se muestra el link dentro de la aplicaicion , y es generado con un slug hecho por el sistema
+
+
+**Show link vista**
+En el show se puede ver los detalles del link con todos sus atributos incluyendo el slug y los atributos propios del tipo del link como una password o para los efimeros si ya se accedio. 
+
+Admeas se ve un listado de vistas, en donde cada vista posee la fecha y direccion de ip . Se puede filtrar por rango de fechas o por ip. Se muestra un resumen de visitas por dia y el total de visitas para el link.
+
+
+
+
+Para los links temporales , un link temporal se creara con una fecha random de 1 mes en adelante. Otro link se creara con la fecha de expiracion 2 minutos mas tarde de la fecha y tiempo de cuando se ejecute el db:setup, por lo que el link expira 2 minutos despues de haber levantado los datos. 
+Sin embargo siempre se puede ver la fecha de expiracion en el show , mostrando ademas si el link esta expirado o no. La fecha de expiracion se puede cambiar desde el edit propio del link
+
+Para los links privados, 1 link se creara con una password random y el otro con una password '111', siempre se puede ver la password en el show y cambiarla en el edit. 
+
+
 * Ruby version
 
 * System dependencies
