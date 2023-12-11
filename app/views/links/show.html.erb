@@ -1,16 +1,14 @@
-<!-- app/views/links/show.html.erb -->
-
 <div class="container mt-5">
   <h1 class="mb-4 text-primary">Link Details</h1>
 
-  <dl class="row bg-light">
+  <dl class="row bg-light p-3">
     <dt class="col-sm-3 text-secondary">ID:</dt>
     <dd class="col-sm-9"><%= @link.id %></dd>
 
     <dt class="col-sm-3 text-secondary">User ID:</dt>
     <dd class="col-sm-9"><%= @link.user_id %></dd>
 
-    <dt class="col-sm-3 text-secondary">Name</dt>
+    <dt class="col-sm-3 text-secondary">Name:</dt>
     <dd class="col-sm-9"><%= @link.name %></dd>
 
     <dt class="col-sm-3 text-secondary">Slug:</dt>
@@ -24,12 +22,13 @@
 
     <dt class="col-sm-3 text-secondary">Updated At:</dt>
     <dd class="col-sm-9"><%= @link.updated_at %></dd>
+
     <% case @link.link_type.to_sym %>
       <% when :temporary %>
         <dt class="col-sm-3 text-secondary">Expiration Date:</dt>
         <dd class="col-sm-9"><%= @link.expiration_date %></dd>
         <% if @link.expired? %> 
-          <dd class="col-sm-9 expired-alert">This link has expired.</dd>
+          <dd class="col-sm-9 text-danger">This link has expired.</dd>
         <% end %>
       <% when :private_link %>
         <dt class="col-sm-3 text-secondary">Password:</dt>
@@ -39,20 +38,19 @@
         <dt class="col-sm-3 text-secondary">Accessed:</dt>
         <dd class="col-sm-9"><%= @link.accessed ? 'Yes' : 'No' %></dd>
         <% if @link.accessed? %> 
-          <dd class="col-sm-9 expired-alert">This link has already been accessed</dd>
+          <dd class="col-sm-9 text-danger">This link has already been accessed</dd>
           <%= link_to 'Reset Ephemeral Link',
             reset_ephemeral_link_link_path(@link),
             method: :patch,
             remote: true,
             data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' },
-            class: 'btn btn-warning',
+            class: 'btn btn-warning mt-2',
             'data-turbo-frame': 'your-turbo-frame-id' %>
         <% end %>
     <% end %>
 
-  <%= render 'visits_table', link_visits: @link_visits %>
-
+    <%= render 'visits_table', link_visits: @link_visits %>
   </dl>
 
-  <%= link_to 'Back to Links', user_path(current_user), class: 'btn btn-primary' %>
+  <%= link_to 'Back to Links', user_path(current_user), class: 'btn btn-primary mt-3' %>
 </div>
