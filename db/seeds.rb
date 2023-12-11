@@ -63,10 +63,23 @@ Link.link_types.keys.each do |link_type|
     temporal_link_user1.expiration_date = 2.minutes.from_now
     temporal_link_user1.save!
   end
-  temporal_link_user1 = Link.find_by(user: user1, link_type: Link.link_types[:temporary])
-  if temporal_link_user1
-    temporal_link_user1.expiration_date = 2.minutes.from_now
-    temporal_link_user1.save!
+  temporal_link_user2 = Link.find_by(user: user2, link_type: Link.link_types[:temporary])
+  if temporal_link_user2
+    temporal_link_user2.expiration_date = 2.minutes.from_now
+    temporal_link_user2.save!
+  end
+
+  private_link_user1 = Link.find_by(user: user1, link_type: Link.link_types[:private_link])
+  if private_link_user1
+    private_link_user1.password = '111'
+    private_link_user1.password_confirmation = '111'
+    private_link_user1.save!
+  end
+  private_link_user2 = Link.find_by(user: user2, link_type: Link.link_types[:private_link])
+  if private_link_user2
+    private_link_user2.password = '111'
+    private_link_user2.password_confirmation = '111'
+    private_link_user2.save!
   end
 
   Link.all.each do |link|
