@@ -130,7 +130,7 @@ Si en algun momento expiremanta algun error puede intetar ejecutar cada comando 
     bundle install
     rails db:create
     rails db:migrate
-
+    rails db:seed
 
 6. **Inicia el servidor :**
 rails server
