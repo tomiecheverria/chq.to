@@ -27,7 +27,7 @@ Link.link_types.keys.each do |link_type|
   
       case link_type.to_sym
       when :temporary
-        link.expiration_date = Faker::Time.forward(days: 30) # Fecha de vencimiento en 30 días
+        link.expiration_date = Faker::Time.forward(days: 30)
       when :private_link
         link.password = 'password123'
         link.password_confirmation = 'password123'
@@ -48,7 +48,7 @@ Link.link_types.keys.each do |link_type|
   
       case link_type.to_sym
       when :temporary
-        link.expiration_date = Faker::Time.forward(days: 30) # Fecha de vencimiento en 30 días
+        link.expiration_date = Faker::Time.forward(days: 30) 
       when :private_link
         link.password = 'password456'
         link.password_confirmation = 'password456'
@@ -57,5 +57,39 @@ Link.link_types.keys.each do |link_type|
       link.save!
     end
   end
+
+  temporal_link_user1 = Link.find_by(user: user1, link_type: Link.link_types[:temporary])
+  if temporal_link_user1
+    temporal_link_user1.expiration_date = 2.minutes.from_now
+    temporal_link_user1.save!
+  end
+  temporal_link_user1 = Link.find_by(user: user1, link_type: Link.link_types[:temporary])
+  if temporal_link_user1
+    temporal_link_user1.expiration_date = 2.minutes.from_now
+    temporal_link_user1.save!
+  end
+
+  Link.all.each do |link|
+    10.times do |i|
+      # Genera una fecha y hora aleatoria en el pasado
+      accessed_at = Faker::Time.backward(days: i)
+      
+      ip_address1 = Faker::Internet.unique.ip_v4_address
+      ip_address2 = Faker::Internet.unique.ip_v4_address
   
+      Visit.create!(
+        link: link,
+        accessed_at: accessed_at,
+        ip_address: ip_address1
+      )
+  
+      Visit.create!(
+        link: link,
+        accessed_at: accessed_at + 1.minute,  
+        ip_address: ip_address2
+      )
+    end
+  end
+  
+
 # rubocop:enable all
