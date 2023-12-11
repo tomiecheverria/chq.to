@@ -1,4 +1,3 @@
-# app/models/visit.rb
 class Visit < ApplicationRecord
   belongs_to :link
 

@@ -4,5 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :username, presence: true, uniqueness: true
-  has_many :links, dependent: :destroy #se pordia hacer con delete all para que sea mas eficiente pero no sepuede hacer callback
+  has_many :links, dependent: :destroy 
 end
