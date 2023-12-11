@@ -94,8 +94,8 @@ Sigue estos pasos para instalar y configurar la aplicación en tu entorno local:
 
 1. **Clona el Repositorio:**
    ```bash
-   git clone https://tu-repositorio.git
-   cd nombre-de-tu-proyecto
+   git clone https://github.com/tomiecheverria/chq.to.git
+    cd chq.to/
 
 2. **Instala Ruby:**
 Asegúrate de tener Ruby instalado en tu sistema. Puedes verificar la versión instalada ejecutando:
@@ -207,7 +207,9 @@ Cada usuario tiene cargado 2 links de cada tipo, teninedo un total de 8 links pa
 Una vez iniciada sesion se tiene disponible el acceso a las funcionalidades del menu donde se puede o cerrar sesion o ir al perfil para manejarlo.
 La vista de perfil solo puede ser accedida si el usuario esta autenticado correctamente. 
 
-En la vista de perfil se puede editar los datos del perfil o cancelar la cuenta. 
+En la vista de perfil se puede editar los datos del perfil o cancelar la cuenta.
+en editar perfil puede cambiar todos sus atrbiutos incluyendo cambiar la contraseña.
+en cancelar cuenta se puede borrar el perfil. 
 * WARNING: borrar el perfil borrara tambien todos los links asociados a esa cuenta y tambien todas las visitas asociadas a  todos los links
 En la vista de perfil es posible tambien crear nuevos links selecccionando el tipo de linlk , mas detalles en el apartado de caracteristicas. 
 Una vez creado el link se puede ver el link publico acortado , en el cual si se selecciona se hace la redireccion a la url privada o larga, si es que se cumple los criterios. La url publica es como se muestra el link dentro de la aplicaicion , y es generado con un slug hecho por el sistema
