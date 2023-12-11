@@ -222,7 +222,7 @@ Admeas se ve un listado de vistas, en donde cada vista posee la fecha y direccio
 
 Tambien se puede editar el link en donde se podran editar todos los atributos incluyendo el tipo y el atributo relacionado con el tipo. 
 
-Finalmente se puede borrar el link , en donde se borrara el link junto con todas las visitas relacionadas a ese link.
+Se puede borrar el link , en donde se borrara el link junto con todas las visitas relacionadas a ese link.
 
 Finalmete se puede cerrra sesion tanto por el menu como por el boton de cerrar sesion.
 
