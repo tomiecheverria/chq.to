@@ -90,17 +90,6 @@ Todas las gemas se pueden actualizar a la ultima version disponible con bundle u
 
 Sigue estos pasos para instalar y configurar la aplicación en tu entorno local:
 
-1. **Clona el Repositorio:**
-   ```bash
-   git clone https://tu-repositorio.git
-   cd nombre-de-tu-proyecto
-
-
-
-Perfecto, aquí tienes una sección de instalación para tu README:
-
-markdown
-Copy code
 ## Instalación
 
 Sigue estos pasos para instalar y configurar la aplicación en tu entorno local:
@@ -148,30 +137,52 @@ Antes de ejecutar la aplicación, revisa y configura los siguientes aspectos seg
 
 1. **Configuración de la Base de Datos:**
    Asegúrate de que la configuración de la base de datos en `config/database.yml` sea correcta para tu entorno de desarrollo, prueba y producción.
+   ## SQLite
+
+    La aplicación utiliza SQLite como sistema de gestión de base de datos en entornos de desarrollo y prueba. Asegúrate de tener SQLite instalado en tu sistema.
+
+    ```bash
+    # Instalar SQLite
+    # Consulta la documentación de SQLite para instrucciones específicas para tu sistema operativo.
+
+    Desarrollo (Development):
+
+    Nombre de la base de datos: storage/development.sqlite3
 
 2. **Configuración de Gemas Adicionales:**
-   Algunas gemas adicionales pueden requerir configuración adicional. Revisa la documentación de cada gema y ajusta sus configuraciones según sea necesario.
+    La unica gema que necesita ser configurada o seteada mas alla de ejecutar el bundle install fue Devise.
+    Se puede ver toda su documentacion y seteo en : https://github.com/heartcombo/devise
+    La gema fue seteada con los mismos valores que explicita la documentacion oficial: 
+    
+    ```ruby
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+    ```
 
-3. **Variables de Entorno:**
-   Si tu aplicación utiliza variables de entorno para configuraciones sensibles, como las claves de API o configuraciones específicas del entorno, asegúrate de configurar estas variables.
-
-   Puedes utilizar un archivo como `.env` para definir variables de entorno en desarrollo. No olvides agregar `.env` a tu archivo `.gitignore` para evitar que se incluyan en tu repositorio.
+    Para el resto de gemas adicionales , si bien no se establecio ninguna configuraion adicional , se explicita la documentacion oficial : 
+    [ruby-lsp](https://github.com/rubyide/vscode-ruby)
+    [RuboCop](https://github.com/rubocop/rubocop)
+    [will_paginate](https://github.com/mislav/will_paginate)
+    [Faker](https://github.com/faker-ruby/faker)
 
 4. **Configuración del Servidor de Desarrollo:**
    Si deseas personalizar la configuración del servidor de desarrollo (por ejemplo, el puerto en el que se ejecuta), revisa el archivo `config/environments/development.rb`.
 
 5. **Configuración de Rutas y Controladores:**
    Verifica las rutas en `config/routes.rb` y los controladores en `app/controllers` para asegurarte de que se ajusten a la lógica de tu aplicación.
+   No se realizo ninguna configuracion especifica para este entorno , viene con la configuracion pre cargada de un proeyecto nuevo de rails.
+   Para ver mas detalle visite la docuementacion oficial de rails.
 
-6. **Personalización del README:**
-   Personaliza este archivo README.md según las necesidades específicas de tu proyecto. Proporciona información adicional sobre cómo usar la aplicación, características clave y cualquier otra información relevante.
+## Uso
 
-7. **Verificación de Configuraciones de Producción:**
-   Antes de implementar la aplicación en un entorno de producción, asegúrate de revisar y ajustar las configuraciones específicas del entorno de producción en `config/environments/production.rb`.
+### Configuración del Entorno
 
-Recuerda documentar cualquier configuración adicional que sea específica de tu aplicación para facilitar la colaboración y la comprensión del código por parte de otros desarrolladores.
+Antes de comenzar a usar la aplicacion, asegurarse de seguir los requisitos del sistema y de seguir la guia de instalacion.
 
+### Ejecucion de la aplicacion
 
+Una vez ya instalada la aplicaicon puede iniciarla con rail server o rails s. Estara disponible en http://127.0.0.1:3000/.
+Ademas posee de una consola de ruby con rails c en donde tiene todos los datos y funciones de la aplicacion actual.
+puede manipular los datos de la base de datos con rails dbconsole 
 
 
 * Ruby version
