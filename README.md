@@ -40,7 +40,8 @@ La aplicación utiliza el framework Ruby on Rails. Se ha desarrollado y probado 
     gem install rails -v 7.1.2
 
 - **Sistema de gestion de base de datos :**
-La aplicación utiliza SQLite como sistema de gestión de base de datos. No es necesario instalarlo por separado, ya que Rails utiliza SQLite por defecto para proyectos nuevos.
+La aplicación utiliza SQLite como sistema de gestión de base de datos. No es necesario instalarlo por separado, ya que Rails utiliza SQLite por defecto para 
+- [SQLite](https://www.sqlite.org/) (Versions 3.8.0 y superiores son compatibles)proyectos nuevos.
 
 - **Bundler :**
 Bundler es una herramienta para gestionar las dependencias de tu proyecto Ruby. Si aún no lo tienes instalado, puedes hacerlo ejecutando:
@@ -120,8 +121,21 @@ bundle install
 
 6. **Configura la base de datos :**
 Ejecuta el siguiente comando para instalar las gemas necesarias:
-
+rails db:drop
 rails db:setup
+
+Si en algun momento expiremanta algun error puede intetar ejecutar cada comando individualmente: 
+        
+    ```bash
+# Instala las gemas necesarias
+bundle install
+
+# Crea la base de datos
+rails db:create
+
+# Ejecuta las migraciones
+rails db:migrate
+
 
 6. **Inicia el servidor :**
 rails server
@@ -330,6 +344,22 @@ La aplicación sigue una estructura típica de proyectos Ruby on Rails. A contin
 
 Además de estos directorios, hay otros archivos y directorios que pueden agregarse según las necesidades del proyecto.
 
+
+## Contribución
+
+¡Gracias por considerar contribuir a nuestro proyecto! Si tienes sugerencias, problemas o deseas aportar con código, aquí hay algunas pautas que debes seguir:
+
+1. Abre un issue para discutir el cambio que te gustaría realizar o el problema que has encontrado.
+2. Si deseas trabajar en una solución, realiza un fork del repositorio.
+3. Crea una rama específica para tu contribución (`git checkout -b tu-rama`).
+4. Realiza los cambios y asegúrate de probarlos.
+5. Haz un pull request a la rama principal de nuestro repositorio.
+
+Agradecemos tu contribución y trabajaremos juntos para revisar y fusionar tus cambios.
+
+## Licencia
+
+Este proyecto está licenciado bajo los términos de la [Licencia MIT](https://opensource.org/licenses/MIT).
 
 
 * Ruby version
