@@ -182,11 +182,20 @@ Una vez ya instalada la aplicaicon puede iniciarla con rail server o rails s. Es
 Ademas posee de una consola de ruby con rails c en donde tiene todos los datos y funciones de la aplicacion actual.
 puede manipular los datos de la base de datos con rails dbconsole 
 
+Para detalles adicionales sobre la instalacion o la configuracion puedo consultr los dos apartados anteriores
+
+## Caracteristicas
 
 ### Acceso a la aplicacion 
 Una vez inicializada la aplicacion , se mostrara el home con varios links , como usuario no logueado lo unico que puede hacer es ver los links del home y acceder a los links si es que cumple con los requsitos necesarios.
+Todos los links se puede acceder publicamete, lo que sigfnifica que si se tiene la url publica o url generada por la pagina, cualquier persona puede acceder a ese link acortado sin necesidad de loguearse, y sera redireccionado al link privado o link largo si es que se cumple las condiciones. 
 
-Las caracteristicas de cada link estaran especificadas en el apartado de caracteristicas. 
+### Auntenticacion y checkeos de permisos 
+Solo el dueño o creador el link puede ver las estadisticas y detalle del link publico , borrar el link o editarlo. 
+En conclusion el usuario publico solo puede ver el home principal de las paginas y acceder al link publico.
+
+En el caso en el que se intente acceder a alguna funcion del link privada del usuario dueño como es la edicion o borrar el link , sera redirigido a la pagina de login. 
+
 
 Se puede iniciar sesion desde el menu con la opcion de sigin in.
 
@@ -203,15 +212,19 @@ email: user2@example.com
 password: password456
 
 Cada usuario tiene cargado 2 links de cada tipo, teninedo un total de 8 links para cada usuario con 20 visitas para cada link. 
-
+**Link publicos:**
 Una vez iniciada sesion se tiene disponible el acceso a las funcionalidades del menu donde se puede o cerrar sesion o ir al perfil para manejarlo.
 La vista de perfil solo puede ser accedida si el usuario esta autenticado correctamente. 
+
+Existen 4 tipos distintos de links :
+
+Los links regulares son lin
 
 En la vista de perfil se puede editar los datos del perfil o cancelar la cuenta.
 en editar perfil puede cambiar todos sus atrbiutos incluyendo cambiar la contraseña.
 en cancelar cuenta se puede borrar el perfil. 
 * WARNING: borrar el perfil borrara tambien todos los links asociados a esa cuenta y tambien todas las visitas asociadas a  todos los links
-En la vista de perfil es posible tambien crear nuevos links selecccionando el tipo de linlk , mas detalles en el apartado de caracteristicas. 
+En la vista de perfil es posible tambien crear nuevos links selecccionando el tipo de linlk 
 Una vez creado el link se puede ver el link publico acortado , en el cual si se selecciona se hace la redireccion a la url privada o larga, si es que se cumple los criterios. La url publica es como se muestra el link dentro de la aplicaicion , y es generado con un slug hecho por el sistema
 
 
