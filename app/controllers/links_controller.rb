@@ -3,6 +3,7 @@ class LinksController < ApplicationController
   include WillPaginate::CollectionMethods
   before_action :authenticate_user!, only: %i[index new create show edit update destroy]
   before_action :find_link, only: %i[show edit update destroy]
+  before_action :find_and_authorize_link, only: %i[show edit update destroy]
 
   def index
     @links = current_user.links.paginate(page: params[:page], per_page: 5)
@@ -81,5 +82,13 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:url, :expiration_date, :link_type, :password, :password_confirmation, :accessed, :name)
+  end
+
+  def find_and_authorize_link
+    @link = Link.find(params[:id])
+    unless current_user == @link.user
+      flash[:alert] = 'You are not authorized to perform this action.'
+      redirect_to root_path
+    end
   end
 end
