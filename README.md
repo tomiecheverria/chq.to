@@ -127,14 +127,9 @@ rails db:setup
 Si en algun momento expiremanta algun error puede intetar ejecutar cada comando individualmente: 
         
     ```bash
-# Instala las gemas necesarias
-bundle install
-
-# Crea la base de datos
-rails db:create
-
-# Ejecuta las migraciones
-rails db:migrate
+    bundle install
+    rails db:create
+    rails db:migrate
 
 
 6. **Inicia el servidor :**
