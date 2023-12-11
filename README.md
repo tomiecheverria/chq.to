@@ -229,9 +229,9 @@ Existen 4 tipos distintos de links :
 
 Los links regulares son links que se pueden acceder sin restriccion alguna  y no tienen ningun atributo en especial
 
-los links temporales son los links que poseen un atributo de fecha de vencimiento. se puede acceder al link siempre que no este vencido , pasada la fecha de vencimiento el link sigue exisitiendo , por lo que se puede hacer todas las acciones de cualquier otro link como show o delete, pero la redireccion no funcionara y devolvera un error 404 por la request ademas de redigir a la vista con error de 404. La fecha de expiracion no puede ser pasada y tampoco puede ser mas de 1 año en adelante.
+los links temporales son los links que poseen un atributo de fecha de vencimiento. se puede acceder al link siempre que no este vencido , pasada la fecha de vencimiento el link sigue exisitiendo , por lo que se puede hacer todas las acciones de cualquier otro link como show o delete, pero la redireccion no funcionara y devolvera un error 404 por la request ademas de redigir a la vista con error de 404. La fecha de expiracion no puede ser pasada y tampoco puede ser mas de 1 año en adelante. La fehca nopuede ser vacia.
 
-los links privados son links que cuando se intenten acceder se solicitara una contraseña , en la que en caso de ser correcta se redireccionara al link , y en caso de fallar , se puede volver a intentar tantas veces como se necesite. Si no coincide no se redirecciona. La password tiene que ser entre 3 y 20 caracteres  y debe de matchear o ser igual a password confirmation. 
+los links privados son links que cuando se intenten acceder se solicitara una contraseña , en la que en caso de ser correcta se redireccionara al link , y en caso de fallar , se puede volver a intentar tantas veces como se necesite. Si no coincide no se redirecciona. La password tiene que ser entre 3 y 20 caracteres  y debe de matchear o ser igual a password confirmation. La contraseña del link se peude ver el show o reporte del link si es que se cuenta con los permisos necesarios.
 
 los links efimeros son links que solo se puede acceder 1 sola vez y se tiene el atributo de accesssed indicando false si no se accedio y true en el caso contrario. si ya se accedio y se vuelve a intentar , redirige a la vista de error 403 con un codigo de respuesta 403 y  no se contavbiliza la visita. El dueño del link puede resetear el valor de accessed en el show del link si es que el link ya fue accedido , por lo que es posible tener mas de una visita asociada a este link. Por defualt el link efimero se crea sin accessos  , por lo que se puede acceder cuando es creado.
 
@@ -254,14 +254,32 @@ En el show se puede ver los detalles del link con todos sus atributos incluyendo
 
 Admeas se ve un listado de vistas, en donde cada vista posee la fecha y direccion de ip . Se puede filtrar por rango de fechas o por ip. Se muestra un resumen de visitas por dia y el total de visitas para el link.
 
+La vista por defualt de show se carga sin parametros de busqueda por llo que se muestra todas las visitas, si se filtra por ip la busqueda es por es similitu y no estritca , por lo que si se filtra por "1" devolvera las vistas tanto de "127" como de "192"
+
+Para el filtrado de las fechas , se incluye la fecha seleccionada para la busqueda.
+
+Para ver el reporte entero de todas las vistas que tiene una pagina, puedes acceder desde el boton del show o no mandar ningun paramtero de busqueda ni en fechas ni en ip. Si no se seleccionan 2 fechas para un rango , con 1 sola fecha no se hara filtrado , por lo que se muestran todos los registros(en el caso de que tampoco haya nada en el parametro por ip)
+
+Ademas del reporte de visitas , se tiene un reporte de visitas por dia en la que se muestra la cantidad de visitas por cada dia. 
+
+Siempre se mostrara la cantidad de visitas totales del link , pero en el caso en que la busqueda no encontro visitas o que el link no tenga visitas , no se mostrara ni el listado de visitas ni el listado de dias. 
+
+se puede volver a la vista de profile con el boton de back to links 
+
+
+**Edit link**
 Tambien se puede editar el link en donde se podran editar todos los atributos incluyendo el tipo y el atributo relacionado con el tipo. 
+En el caso que se seleccione link temporal o privado , se pedira que se complete el atriubto especial para ese tipo de link , fecha de expiracion y passwords correspondientemente. En conclusion  los links pueden cambiar de tipo a lo largo de su vida. 
+
+**Borrar link**
 
 Se puede borrar el link , en donde se borrara el link junto con todas las visitas relacionadas a ese link.
+Se pedira una confirmacion , en el caso de que se cancele , no se borrara, pero en el caso que se acepte se borrara el link junto con todas las visitas asociadas. 
 
 Finalmete se puede cerrra sesion tanto por el menu como por el boton de cerrar sesion.
 
 
-
+**Datos de preuba precargados**
 Para los links temporales , un link temporal se creara con una fecha random de 1 mes en adelante. Otro link se creara con la fecha de expiracion 2 minutos mas tarde de la fecha y tiempo de cuando se ejecute el db:setup, por lo que el link expira 2 minutos despues de haber levantado los datos. 
 Sin embargo siempre se puede ver la fecha de expiracion en el show , mostrando ademas si el link esta expirado o no. La fecha de expiracion se puede cambiar desde el edit propio del link
 
