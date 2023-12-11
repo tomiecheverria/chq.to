@@ -49,12 +49,12 @@ module LinksHelper
   end
 
   def handle_ephemeral_link_accessed(link)
-    flash[:alert] = 'This ephemeral link has already been accessed and is no longer valid.'
+    flash[:error] = 'This ephemeral link has already been accessed and is no longer valid.'
     render 'errors/forbidden', status: :forbidden
   end
 
   def handle_expired_link
-    flash[:alert] = 'The link has expired'
+    flash[:error] = 'The link has expired'
     render 'errors/not_found', status: :not_found
   end
 
@@ -83,7 +83,7 @@ module LinksHelper
   end
 
   def handle_invalid_link
-    flash[:alert] = 'This link does not exist'
+    flash[:error] = 'This link does not exist'
     redirect_back fallback_location: root_path
   end
 

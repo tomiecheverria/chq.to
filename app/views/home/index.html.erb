@@ -29,28 +29,36 @@
 
             <h2>Links:</h2>
 
-            <!-- Mostrar links regulares -->
+           
             <h3>Regular Links:</h3>
             <% @regular_links.each do |link| %>
-            <%= link_to link.url, link_path(link) %><br>
+            <%= button_to redirect_link_path(link.slug), method: :get, class: 'btn btn-link selectable-button', data: { turbo: false }, style: 'white-space: nowrap;' do %>
+            <%= build_link_url(link.slug) %>
+            <% end %>
             <% end %>
 
-            <!-- Mostrar links temporales -->
+            
             <h3>Temporary Links:</h3>
             <% @temporary_links.each do |link| %>
-            <%= link_to link.url, link_path(link) %><br>
+            <%= button_to redirect_link_path(link.slug), method: :get, class: 'btn btn-link selectable-button', data: { turbo: false }, style: 'white-space: nowrap;' do %>
+            <%= build_link_url(link.slug) %>
+            <% end %>
             <% end %>
 
-            <!-- Mostrar links privados -->
+            
             <h3>Private Links:</h3>
             <% @private_links.each do |link| %>
-            <%= link_to link.url, link_path(link) %><br>
+            <%= button_to redirect_link_path(link.slug), method: :get, class: 'btn btn-link selectable-button', data: { turbo: false }, style: 'white-space: nowrap;' do %>
+            <%= build_link_url(link.slug) %>
+            <% end %>
             <% end %>
 
-            <!-- Mostrar links efímeros -->
+         
             <h3>Ephemeral Links:</h3>
             <% @ephemeral_links.each do |link| %>
-            <%= link_to link.url, link_path(link) %><br>
+            <%= button_to redirect_link_path(link.slug), method: :get, class: 'btn btn-link selectable-button', data: { turbo: false }, style: 'white-space: nowrap;' do %>
+            <%= build_link_url(link.slug) %>
+            <% end %>
             <% end %>
 
 
