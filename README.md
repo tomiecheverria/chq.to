@@ -217,7 +217,9 @@ La vista de perfil solo puede ser accedida si el usuario esta autenticado correc
 Si se cumplen las condiciones para las redireccciones , se registra una visita con la direcccionj de ip y la fecha y hora.
 En el caso en el que no se cumpla los criterios no se hara la redireccion y no se contara como visita
 Si la redireccion es exitosa , ademas de redirigir se registra la visita acordemente y se responde con el codigo de respueta apropiado de 302.
-En el caso de que se intente acceder a un link  publico cuyo slug sea invalido , se redirecciona a home con el metodo del link no existe. 
+En el caso de que se intente acceder a un link  publico cuyo slug sea invalido , se redirecciona a home con el metodo del link no existe.
+Los links publicos o internos de la app se mostraran con la url base/l/slug que depende del ambiente donde se ejecute la aplicacion. En caso de ser production sera la url de chq.to , en case de que sea development sera "http://127.0.0.1:3000". El resto del patron es /l/slug , donde el slug es generado por el sistema al momento de la creacion, unico en el sistema y no puede ser modificado.
+
 **Creacion de links**: 
 si un usuario esta auntenticado puede crear un link, en donde se especifica la url pirvada o larga a la que el link publico redirecciona , un nombre del link que puede estar en blanco o tener entre 3 y 40 caracteres. En caso de dejar en blanco tendra el nombre de Unnamed link. 
 
@@ -234,6 +236,10 @@ los links privados son links que cuando se intenten acceder se solicitara una co
 los links efimeros son links que solo se puede acceder 1 sola vez y se tiene el atributo de accesssed indicando false si no se accedio y true en el caso contrario. si ya se accedio y se vuelve a intentar , redirige a la vista de error 403 con un codigo de respuesta 403 y  no se contavbiliza la visita. El dueño del link puede resetear el valor de accessed en el show del link si es que el link ya fue accedido , por lo que es posible tener mas de una visita asociada a este link. Por defualt el link efimero se crea sin accessos  , por lo que se puede acceder cuando es creado.
 
 
+**Perfil de un usuario y Links**
+Las operaciones sobre los links solo pueden ser hechas por el dueño o creador del link. En el caso de que se intente acceder a un lik sobre el que no se tenga permisos o no exista , sera redireccionado al home con el mensaje apropiado. 
+
+Tanto los links del usurio como las visitas en el reporte estan listadas en pagians de 5 elementos ,  se cuenta con un paginador al fondo del listado para moverse entre las pagianas. 
 
 En la vista de perfil se puede editar los datos del perfil o cancelar la cuenta.
 en editar perfil puede cambiar todos sus atrbiutos incluyendo cambiar la contraseña.
