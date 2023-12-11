@@ -229,7 +229,8 @@ Existen 4 tipos distintos de links :
 
 Los links regulares son links que se pueden acceder sin restriccion alguna  y no tienen ningun atributo en especial
 
-los links temporales son los links que poseen un atributo de fecha de vencimiento. se puede acceder al link siempre que no este vencido , pasada la fecha de vencimiento el link sigue exisitiendo , por lo que se puede hacer todas las acciones de cualquier otro link como show o delete, pero la redireccion no funcionara y devolvera un error 404 por la request ademas de redigir a la vista con error de 404. La fecha de expiracion no puede ser pasada y tampoco puede ser mas de 1 año en adelante. La fehca nopuede ser vacia.
+los links temporales son los links que poseen un atributo de fecha de vencimiento. se puede acceder al link siempre que no este vencido , pasada la fecha de vencimiento el link sigue exisitiendo , por lo que se puede hacer todas las acciones de cualquier otro link como show o delete, pero la redireccion no funcionara y devolvera un error 404 por la request ademas de redigir a la vista con error de 404. La fecha de expiracion no puede ser pasada y tampoco puede ser mas de 1 año en adelante. La fehca no puede ser vacia.
+
 
 los links privados son links que cuando se intenten acceder se solicitara una contraseña , en la que en caso de ser correcta se redireccionara al link , y en caso de fallar , se puede volver a intentar tantas veces como se necesite. Si no coincide no se redirecciona. La password tiene que ser entre 3 y 20 caracteres  y debe de matchear o ser igual a password confirmation. La contraseña del link se peude ver el show o reporte del link si es que se cuenta con los permisos necesarios.
 
@@ -284,6 +285,51 @@ Para los links temporales , un link temporal se creara con una fecha random de 1
 Sin embargo siempre se puede ver la fecha de expiracion en el show , mostrando ademas si el link esta expirado o no. La fecha de expiracion se puede cambiar desde el edit propio del link
 
 Para los links privados, 1 link se creara con una password random y el otro con una password '111', siempre se puede ver la password en el show y cambiarla en el edit. 
+
+**Consideracion general**
+La aplicacion corre con un time zone de buenos aires argentina.
+
+## Estructura del Proyecto
+
+La aplicación sigue una estructura típica de proyectos Ruby on Rails. A continuación, se presenta una descripción de los directorios y archivos clave:
+
+- **app:** Contiene la lógica principal de la aplicación, incluyendo modelos, controladores y vistas.
+    **assets:** Contiene activos como hojas de estilo (CSS), archivos JavaScript y archivos de im
+  - **controllers:** Controladores de Rails para gestionar la lógica de las solicitudes HTTP.
+   - **Helpers:** Contiene metodos que se encarga de procesar los datos para no sobercargar los controladores
+  - **models:** Modelos de ActiveRecord que representan las entidades de la base de datos.
+  - **views:** Vistas de Rails que definen la presentación y la interfaz de usuario.
+
+- **storage:** Directorio utilizado para almacenar ciertos archivos generados o gestionados por la aplicación.
+
+
+- **config:** Configuraciones específicas de la aplicación.
+  - **initializers:** Archivos de inicialización de la aplicación.
+  - **locales:** Archivos de traducción si se implementa internacionalización.
+  - **enviroments:** Contiene los archivos de configuraciones para los distintos entornos
+  
+
+- **db:** Archivos relacionados con la base de datos.
+  - **migrate:** Migraciones de base de datos para definir y modificar el esquema de la base de datos.
+
+- **public:** Archivos estáticos accesibles directamente desde el navegador.
+
+- **test:** Pruebas automatizadas.
+  - **fixtures:** Datos de prueba para las pruebas.
+  - **models:** Pruebas de modelos.
+  - **controllers:** Pruebas de controladores.
+  - **integration:** Pruebas de integración.
+
+- **vendor:** Dependencias de terceros.
+
+- **Gemfile y Gemfile.lock:** Archivos de definición de gemas y bloqueo de versiones.
+
+- **config.ru:** Configuración del servidor Rack para ejecutar la aplicación.
+
+- **Rakefile:** Tareas Rake para automatizar tareas comunes.
+
+Además de estos directorios, hay otros archivos y directorios que pueden agregarse según las necesidades del proyecto.
+
 
 
 * Ruby version
