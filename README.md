@@ -28,7 +28,7 @@ Asegúrate de tener instalados los siguientes requisitos del sistema antes de ej
 - **Ruby:** La aplicación requiere Ruby. Se ha desarrollado y probado con Ruby 3.2.2. Puedes instalar Ruby utilizando un administrador de versiones como RVM o rbenv.
 
   ```bash
-  # Instalación con RVM
+
   \curl -sSL https://get.rvm.io | bash -s stable
   source ~/.rvm/scripts/rvm
   rvm install 3.2.2
@@ -37,7 +37,6 @@ Asegúrate de tener instalados los siguientes requisitos del sistema antes de ej
 - **Rails:**
 La aplicación utiliza el framework Ruby on Rails. Se ha desarrollado y probado con Rails 7.1.2. Puedes instalar Rails utilizando el siguiente comando:
     ```bash
-    # Instalación con RVM
     gem install rails -v 7.1.2
 
 - **Sistema de gestion de base de datos :**
@@ -46,7 +45,6 @@ La aplicación utiliza SQLite como sistema de gestión de base de datos. No es n
 - **Bundler :**
 Bundler es una herramienta para gestionar las dependencias de tu proyecto Ruby. Si aún no lo tienes instalado, puedes hacerlo ejecutando:
     ```bash
-    # Instalación con RVM
     gem install bundler
 
 - **Navegador :**
