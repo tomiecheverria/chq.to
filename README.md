@@ -249,7 +249,7 @@ los links efimeros son links que solo se puede acceder 1 sola vez y se tiene el 
 **Perfil de un usuario y Links**
 Las operaciones sobre los links solo pueden ser hechas por el dueño o creador del link. En el caso de que se intente acceder a un lik sobre el que no se tenga permisos o no exista , sera redireccionado al home con el mensaje apropiado. 
 
-Tanto los links del usurio como las visitas en el reporte estan listadas en pagians de 5 elementos ,  se cuenta con un paginador al fondo del listado para moverse entre las pagianas. 
+Tanto los links del usurio como las visitas en el reporte estan listadas en paginas de 5 elementos ,  se cuenta con un paginador al fondo del listado para moverse entre las pagianas. 
 
 En la vista de perfil se puede editar los datos del perfil o cancelar la cuenta.
 en editar perfil puede cambiar todos sus atrbiutos incluyendo cambiar la contraseña.
