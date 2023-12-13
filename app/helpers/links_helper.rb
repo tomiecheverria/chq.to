@@ -65,20 +65,16 @@ module LinksHelper
   end
 
   def create_and_redirect_to_link(link)
-    visit = link.visits.new(
-      accessed_at: Time.current,
-      ip_address: request.remote_ip
-    )
-    if link.custom_private_link?
-      link.password_confirmation = link.password
-    end
-    if link.save && visit.save
-      redirect_to_link(link)
-    else
-      Rails.logger.error("Failed to save link or visit. Link errors: #{link.errors.full_messages}, Visit errors: #{visit.errors.full_messages}")
-      flash[:error] = 'Error creating link or visit'
-      redirect_back fallback_location: root_path
-    end
+    visit = link.visits.new(accessed_at: Time.current, ip_address: request.remote_ip)
+    link.password_confirmation = link.password if link.custom_private_link?
+    
+    (link.save && visit.save) ? redirect_to_link(link) : handle_save_error(link, visit)
+  end
+
+  def handle_save_error(link, visit)
+    Rails.logger.error("Failed to save link or visit. Link errors: #{link.errors.full_messages}, Visit errors: #{visit.errors.full_messages}")
+    flash[:error] = 'Error creating link or visit'
+    redirect_back fallback_location: root_path
   end
 
   def redirect_to_link(link)
