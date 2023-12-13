@@ -1,9 +1,9 @@
 class LinksController < ApplicationController
   include LinksHelper
   include WillPaginate::CollectionMethods
-  before_action :authenticate_user!, only: %i[index new create show edit update destroy]
+  before_action :authenticate_user!, only: %i[index new create show edit update destroy reset_ephemeral_link]
   before_action :find_link, only: %i[show edit update destroy]
-  before_action :find_and_authorize_link, only: %i[show edit update destroy]
+  before_action :find_and_authorize_link, only: %i[show edit update destroy reset_ephemeral_link]
 
   def index
     @links = current_user.links.paginate(page: params[:page], per_page: 5)
