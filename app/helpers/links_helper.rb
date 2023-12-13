@@ -69,10 +69,13 @@ module LinksHelper
       accessed_at: Time.current,
       ip_address: request.remote_ip
     )
-
+    if link.custom_private_link?
+      link.password_confirmation = link.password
+    end
     if link.save && visit.save
       redirect_to_link(link)
     else
+      Rails.logger.error("Failed to save link or visit. Link errors: #{link.errors.full_messages}, Visit errors: #{visit.errors.full_messages}")
       flash[:error] = 'Error creating link or visit'
       redirect_back fallback_location: root_path
     end
@@ -95,7 +98,6 @@ module LinksHelper
   def build_link_with_type(user, params)
     link = user.links.build(params)
     link.link_type = link_type_from_params(params[:link_type])
-    link.password_confirmation = params[:password_confirmation] if link.private_link?
     link
   end
 
