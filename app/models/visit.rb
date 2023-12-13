@@ -1,5 +1,5 @@
 class Visit < ApplicationRecord
-  belongs_to :link, counter_cache: true
+  belongs_to :link
 
   validates :link_id, presence: true
   validates :accessed_at, presence: true

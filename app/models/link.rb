@@ -1,6 +1,6 @@
 class Link < ApplicationRecord
   belongs_to :user
-  has_many :visits, dependent: :destroy, counter_cache: true
+  has_many :visits, dependent: :destroy
   enum link_type: { regular: 0, temporary: 1, private_link: 2, ephemeral: 3 }
 
   validates :name, presence: true, length: { in: 3..40 }

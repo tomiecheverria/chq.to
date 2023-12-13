@@ -22,7 +22,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_205924) do
     t.integer "link_type", null: false
     t.string "password"
     t.boolean "accessed", default: false
-    t.integer "visits_count", default: 0
     t.index ["slug"], name: "index_links_on_slug"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
