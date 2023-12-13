@@ -239,6 +239,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_form (5.3.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     sorbet-runtime (0.5.11150)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -293,6 +296,7 @@ DEPENDENCIES
   rubocop
   ruby-lsp
   selenium-webdriver
+  simple_form
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
