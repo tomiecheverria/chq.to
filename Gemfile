@@ -47,6 +47,8 @@ gem "rubocop"
 gem 'will_paginate'
 gem 'faker'
 gem 'simple_form'
+gem 'ransack'
+
 
 
 

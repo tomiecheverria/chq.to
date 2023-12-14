@@ -16,4 +16,9 @@ class Visit < ApplicationRecord
     errors.add(:accessed_at,
                'should be a valid datetime format (YYYY-MM-DD HH:MM:SS)')
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["accessed_at", "created_at", "id", "ip_address", "link_id", "updated_at"]
+  end
+
 end
